@@ -14,7 +14,6 @@ styles for when user has asked to hide distractions
 body.yf-hide #upnext,
 /* hides trending..etch*/
 /* body.yf-hide ytd-browse[page-subtype="channels"], */
-
 /* body.yf-hide #contentContainer, */
 /* body.yf-hide #guide-icon, */
 body.yf-hide ytd-banner-promo-renderer,
@@ -33,8 +32,9 @@ body.yf-hide .videowall-endscreen {
 body.yf-hide
   ytd-guide-section-renderer:first-child
   #items
-  > ytd-guide-entry-renderer:not(:first-child),
-body.yf-hide ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)) {
+  > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(3)),
+body.yf-hide
+  ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
   display: none;
 }
 
@@ -45,3 +45,14 @@ body.yf-hide #contents.ytd-compact-autoplay-renderer,
 body.yf-hide #companion {
   display: none;
 }
+
+/* work on ad hider */
+body.yf-hide-ad ytd-video-masthead-ad-v3-renderer,
+body.yf-hide-ad ytd-action-companion-ad-renderer,
+body.yf-hide-ad .ytd-player-legacy-desktop-watch-ads-renderer,
+body.yf-hide-ad ytd-promoted-sparkles-web-renderer {
+  display: none;
+}
+
+/* body.yf-hideAd
+body.yf-hideAd  */
