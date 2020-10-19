@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+
+body{
+  padding: 16px;
+  width: 194px;
+}
+
+header{
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.informational-text{
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: top;
+  font-size: 16px;
+  margin-right: 16px;
+
+}
+
+  button{
+    padding:0;
+    border:none;
+    border-radius:10px;
+    outline: none;
+    width: 39px;
+    background-color: #ECEFF1;
+    display:inline-block;
+
+  }
+  .toggle-circle {
+    height: 20px;
+    width: 20px;
+    outline: transparent;
+    border:none;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+    /* Don't render before we know if the toggle is on or off so that we don't trigger and animation when we set it in the js */
+    display:none
+  }
+
+    button.toggle-off .toggle-circle {
+      background-color: #B0BEC5;
+      display:block;
+    }
+    button.toggle-on .toggle-circle {
+      /* background-color: #ff0000; */
+      background-color: #1976D2;
+      transform: translateX(19px);
+      display: block;
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="images/Logo1.png"></img>
+    </header>
+    <div class="setting">
+      <div class="informational-text">
+        Hide Distractions<br/> on YouTube
+      </div>
+
+    <button id="alterDistractions">
+      <div class="toggle-circle">
+      </div>
+    </button>
+  </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

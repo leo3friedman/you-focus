@@ -1,0 +1,30 @@
+{
+  "name": "YouFocus",
+  "version": "0.1",
+  "description": "Hide YouTube distractions with a single click",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "run_at": "document_start",
+      "css": ["hide.css"],
+      "js": ["main.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/YouFocus16x16.png",
+      "32": "images/YouFocus32x32.png",
+      "48": "images/YouFocus48x48.png",
+      "128": "images/YouFocus128x128.png"
+    }
+  },
+  "icons": {
+    "16": "images/YouFocus16x16.png",
+    "32": "images/YouFocus32x32.png",
+    "48": "images/YouFocus48x48.png",
+    "128": "images/YouFocus128x128.png"
+  },
+  "manifest_version": 2
+}
