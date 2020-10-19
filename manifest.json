@@ -1,6 +1,6 @@
 {
   "name": "YouFocus",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Hides Distracting Content on YouTube",
   "permissions": [
     "storage",
