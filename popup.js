@@ -21,6 +21,21 @@ function handleClick(event) {
 
 alterDistractionsButton.onclick = handleClick;
 
+// Working on options page
+
+let openOptionsPageButton = document.getElementById("openOptionsPage");
+function addClass() {
+  openOptionsPage.className = "toggle-off";
+}
+function openOptionPageOnClick(event) {
+  chrome.tabs.create({
+    url: "chrome-extension://kdnhalmldomdjpafllbpkanfiihlaclb/options.html",
+  });
+}
+
+addClass();
+openOptionsPageButton.onclick = openOptionPageOnClick;
+
 // Working on the ad hiding button
 let adShowing = true;
 
