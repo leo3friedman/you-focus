@@ -61,3 +61,42 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
     }
   }
 });
+
+// functions for options
+
+function showHomepageVideos() {
+  document.body.classList.remove("yf-hide");
+}
+function hideHomepageVideos() {
+  document.body.classList.add("yf-hide");
+}
+function showHomepageSidebar() {
+  document.body.classList.remove("yf-hide");
+}
+function hideHomepageSidebar() {
+  document.body.classList.add("yf-hide");
+}
+function showPlayerEndwall() {
+  document.body.classList.remove("yf-hide");
+}
+function hidePlayerEndwall() {
+  document.body.classList.add("yf-hide");
+}
+function showPlayerRightVideos() {
+  document.body.classList.remove("yf-hide");
+}
+function hidePlayerRightVideos() {
+  document.body.classList.add("yf-hide");
+}
+function showPlayerComments() {
+  document.body.classList.remove("yf-hide");
+}
+function hidePlayerComments() {
+  document.body.classList.add("yf-hide");
+}
+function showPlayerLiveChat() {
+  document.body.classList.remove("yf-hide");
+}
+function hidePlayerLiveChat() {
+  document.body.classList.add("yf-hide");
+}

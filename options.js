@@ -2,9 +2,10 @@ let toggleHomepageOptionsButton = document.getElementById(
   "homepageOptionsButton"
 );
 
-let homepage = document.getElementById("homepageImage");
+let homepageVideos = document.getElementById("homepageVideosButton");
+let homepageSidebar = document.getElementById("homepageSidebarButton");
 
-function changeOptions() {
+function changeHomepageVideos() {
   if (homepage.src.endsWith("HPshowSBshow.png")) {
     console.log(homepage.src);
     homepage.src = "images/HPhidSBshow.png";

@@ -10,7 +10,7 @@
       padding-bottom: 25px;
       display: flex;
       width: 1100px;
-      margin-left: 350px;
+      /* margin-left: 350px; */
       border-radius: 5px;
       border-style: solid;
       border-color: #d2d2d2;
@@ -26,29 +26,61 @@
       padding-left: 25px;
     }
     .optionsImage {
-      display: flex;
+      display: inline-block;
     }
     .checkbox {
       width: 20px;
       height: 20px;
-      display: flex;
+      display: inline-block;
       margin-right: 25px;
+      margin-left: 25px;
+    }
+    .optionButtons {
+    }
+    .button-and-text {
+      display: flex;
+      margin-bottom: 25px;
+    }
+    .options-header {
+      font-size: 25px;
+      margin-left: 25px;
+      margin-right: 25px;
+      border-bottom: 1px solid #dfdfdf;
+      margin-bottom: 12.5px;
+    }
+    .logo {
+      margin-top: 25px;
+      display: inline-block;
+    }
+    .switch-modes {
+      width: 100px;
+      height: 50px;
     }
   </style>
   <body class="body-color">
-    <header>
+    <div class="logo">
       <div>
         <img src="images/Logo1.png" />
       </div>
-    </header>
-    <h1>Options</h1>
+      <button class="switch-modes">Edit Hopepage</button>
+    </div>
     <div class="option-homepage">
-      <div class="informational-text">Hide Homepage Videos</div>
-      <button class="checkbox" id="homepageOptionsButton"></button>
+      <div class="option-buttons">
+        <h1 class="options-header">Costomize Toggle</h1>
+        <div class="button-and-text">
+          <div class="informational-text">Hide Homepage Videos</div>
+          <button class="checkbox" id="homepageVideosButton"></button>
+        </div>
+        <div class="button-and-text">
+          <div class="informational-text">Clean Up Sidebar</div>
+          <button class="checkbox" id="homepageSidebarButton"></button>
+        </div>
+      </div>
       <div class="optionsImage">
-        <img id="homepageImage" src="images/HPshowSBshow.png" />
+        <img id="homepageImage" src="images/HPshSBshSML.png" />
       </div>
     </div>
+
     <script src="options.js"></script>
   </body>
 </html>
