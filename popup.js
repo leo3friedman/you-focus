@@ -4,9 +4,9 @@ let alterDistractionsButton = document.getElementById("alterDistractions");
 
 function doToggle(isShowing) {
   if (isShowing) {
-    alterDistractionsButton.className = "toggle-off";
+    alterDistractionsButton.className = "toggle toggle-off";
   } else {
-    alterDistractionsButton.className = "toggle-on";
+    alterDistractionsButton.className = "toggle toggle-on";
   }
 }
 
@@ -24,16 +24,13 @@ alterDistractionsButton.onclick = handleClick;
 // Working on options page
 
 let openOptionsPageButton = document.getElementById("openOptionsPage");
-function addClass() {
-  openOptionsPage.className = "toggle-off";
-}
+
 function openOptionPageOnClick(event) {
   chrome.tabs.create({
     url: "chrome-extension://kdnhalmldomdjpafllbpkanfiihlaclb/options.html",
   });
 }
 
-addClass();
 openOptionsPageButton.onclick = openOptionPageOnClick;
 
 // Working on the ad hiding button
@@ -43,9 +40,9 @@ let alterAdsButton = document.getElementById("alterAds");
 
 function doAdToggle(adShowing) {
   if (adShowing) {
-    alterAdsButton.className = "toggle-off";
+    alterAdsButton.className = "toggle toggle-off";
   } else {
-    alterAdsButton.className = "toggle-on";
+    alterAdsButton.className = "toggle toggle-on";
   }
 }
 
@@ -65,16 +62,16 @@ window.onload = function () {
     result
   ) {
     if (result.isShowing) {
-      alterDistractionsButton.className = "toggle-off";
+      alterDistractionsButton.className = "toggle toggle-off";
     } else {
-      alterDistractionsButton.className = "toggle-on";
+      alterDistractionsButton.className = "toggle toggle-on";
     }
 
     // For ad Hiding
     if (result.adShowing) {
-      alterAdsButton.className = "toggle-off";
+      alterAdsButton.className = "toggle toggle-off";
     } else {
-      alterAdsButton.className = "toggle-on";
+      alterAdsButton.className = "toggle toggle-on";
     }
   });
 };

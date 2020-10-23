@@ -11,6 +11,23 @@
         padding-bottom: 8px;
         margin-bottom: 16px;
         border-bottom: 1px solid #dfdfdf;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .icon-button {
+        border: none;
+        background-color: transparent;
+        border-radius: 16px;
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+      }
+
+      .icon-button:hover {
+        background-color: #f2f2f2;
+        cursor: pointer;
       }
 
       .informational-text {
@@ -22,7 +39,8 @@
         margin-right: 16px;
       }
       /* button */
-      button {
+
+      .toggle {
         padding: 0;
         border: none;
         border-radius: 10px;
@@ -60,28 +78,27 @@
   <body>
     <header>
       <img src="images/Logo1.png" />
+      <div class="options">
+        <button class="icon-button" id="openOptionsPage">
+          <img src="images/more-vertical.svg" />
+        </button>
+      </div>
     </header>
     <div class="setting">
       <div class="informational-text">Hide Distractions <br /></div>
-      <button id="alterDistractions">
+      <button class="toggle" id="alterDistractions">
         <div class="toggle-circle"></div>
       </button>
     </div>
 
     <div class="ad-hider">
       <div class="informational-text">Adblocker<br /></div>
-      <button id="alterAds">
+      <button class="toggle" id="alterAds">
         <div class="toggle-circle"></div>
       </button>
     </div>
 
     <!-- experimenting with options page -->
-    <div class="options">
-      <div class="informational-text">openOptionsPage<br /></div>
-      <button id="openOptionsPage">
-        <div class="toggle-circle"></div>
-      </button>
-    </div>
 
     <script src="popup.js"></script>
   </body>
