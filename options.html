@@ -1,86 +1,154 @@
 <html>
   <style>
-    .body-color {
+    body {
       background-color: #f5f5f5;
+      /* display: flex; */
     }
-
+    .options {
+      width: 1101px;
+      margin: 0 auto;
+      display: flex;
+      margin-top: 16px;
+    }
     .option-homepage {
       background-color: white;
-      padding-top: 25px;
-      padding-bottom: 25px;
+      padding-top: 32px;
+      padding-bottom: 32px;
       display: flex;
-      width: 1100px;
-      /* margin-left: 350px; */
-      border-radius: 5px;
+      border-radius: 4px;
       border-style: solid;
       border-color: #d2d2d2;
       border-width: 1px;
     }
-    .informational-text {
-      white-space: nowrap;
+    .option-image {
       display: flex;
+      padding-right: 32px;
+      border-radius: 4px;
+    }
+    .customtomize-page-options {
+      display: flex;
+    }
+    .change-homepage-videos {
+      display: flex;
+      margin-bottom: 16px;
+    }
+    .change-sidebar {
+      display: flex;
+    }
+
+    .informational-text {
+      white-space: normal;
+      display: block;
       line-height: 20px;
       vertical-align: top;
       font-size: 16px;
       margin-right: 16px;
       padding-left: 25px;
+      width: 170px;
     }
-    .optionsImage {
-      display: inline-block;
-    }
+
     .checkbox {
       width: 20px;
       height: 20px;
-      display: inline-block;
       margin-right: 25px;
       margin-left: 25px;
     }
     .optionButtons {
+      display: inline-block;
     }
-    .button-and-text {
-      display: flex;
-      margin-bottom: 25px;
-    }
+
     .options-header {
       font-size: 25px;
       margin-left: 25px;
       margin-right: 25px;
       border-bottom: 1px solid #dfdfdf;
       margin-bottom: 12.5px;
-    }
-    .logo {
-      margin-top: 25px;
       display: inline-block;
     }
+    .menu {
+      display: block;
+    }
+    .logo {
+      margin-bottom: 32px;
+    }
     .switch-modes {
-      width: 100px;
+      width: 150px;
       height: 50px;
     }
+    .toggleCheck {
+    }
   </style>
-  <body class="body-color">
-    <div class="logo">
-      <div>
-        <img src="images/Logo1.png" />
-      </div>
-      <button class="switch-modes">Edit Hopepage</button>
-    </div>
-    <div class="option-homepage">
-      <div class="option-buttons">
-        <h1 class="options-header">Costomize Toggle</h1>
-        <div class="button-and-text">
-          <div class="informational-text">Hide Homepage Videos</div>
-          <button class="checkbox" id="homepageVideosButton"></button>
+  <body>
+    <div class="options">
+      <div class="menu">
+        <div class="logo">
+          <img src="images/Logo1.png" />
         </div>
-        <div class="button-and-text">
-          <div class="informational-text">Clean Up Sidebar</div>
-          <button class="checkbox" id="homepageSidebarButton"></button>
+        <button class="switch-modes">Edit Hopepage</button>
+      </div>
+      <div class="option-homepage">
+        <div class="costomize-page-options">
+          <h1 class="options-header">Customize Toggle</h1>
+          <div class="change-homepage-videos">
+            <div class="informational-text">Hide Homepage Videos</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="homepageVideos"
+            />
+          </div>
+          <div class="change-sidebar">
+            <div class="informational-text">Clean Up Sidebar</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="homepageSidebar"
+            />
+          </div>
+          <div class="change-sidebar">
+            <div class="informational-text">Hide Player Endwall</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="playerEndwall"
+            />
+          </div>
+          <div class="change-sidebar">
+            <div class="informational-text">Hide Player Comments</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="playerComments"
+            />
+          </div>
+          <div class="change-sidebar">
+            <div class="informational-text">Hide Player Related</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="playerRelated"
+            />
+          </div>
+          <div class="change-sidebar">
+            <div class="informational-text">Hide Player Live Chat</div>
+            <input
+              type="checkbox"
+              checked="true"
+              class="checkbox"
+              id="playerLiveChat"
+            />
+          </div>
+        </div>
+        <div class="option-image">
+          <img id="homepageImage" src="images/HPshSBshSML.png" />
         </div>
       </div>
-      <div class="optionsImage">
-        <img id="homepageImage" src="images/HPshSBshSML.png" />
-      </div>
     </div>
-
     <script src="options.js"></script>
   </body>
 </html>

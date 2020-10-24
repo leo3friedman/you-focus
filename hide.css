@@ -12,18 +12,12 @@ styles for when user has asked to hide distractions
 
 /* "upnext" next to autoplay toggle */
 body.yf-hide #upnext,
-/* hides trending..etch*/
-/* body.yf-hide ytd-browse[page-subtype="channels"], */
-/* body.yf-hide #contentContainer, */
-/* body.yf-hide #guide-icon, */
 body.yf-hide ytd-banner-promo-renderer,
 body.yf-hide ytd-rich-grid-renderer,
 body.yf-hide grid-title,
-/* body.yf-hide #items, */
 body.yf-hide ytd-video-masthead-ad-v3-renderer,
 body.yf-hide ytd-mini-guide-renderer,
 /* body.yf-hide #guide-content, */
-
 body.yf-hide .videowall-endscreen {
   visibility: hidden;
 }
@@ -56,3 +50,8 @@ body.yf-hide-ad ytd-promoted-sparkles-web-renderer {
 
 /* body.yf-hideAd
 body.yf-hideAd  */
+/* hides trending..etch*/
+/* body.yf-hide ytd-browse[page-subtype="channels"], */
+/* body.yf-hide #contentContainer, */
+/* body.yf-hide #guide-icon, */
+/* body.yf-hide #items, */
