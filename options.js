@@ -11,7 +11,6 @@ const defaultSettings = {
   hidePlayerEndwall: true,
   hidePlayerRelated: true,
   hidePlayerComments: false,
-  hidePlayerLiveChat: false,
 };
 
 function toggleSettings(optionKey) {
@@ -22,38 +21,100 @@ function toggleSettings(optionKey) {
   });
 }
 
-function updateHomepageOptionsImage() {
-  chrome.storage.sync.get(defaultSettings, function (result) {
-    if (result.hideHomepageVideos && result.hideHomepageSidebar) {
-      homepageOptionsImage.src = "images/HPhidSBhidSML.png";
-    } else if (result.hideHomepageVideos && !result.hideHomepageSidebar) {
-      homepageOptionsImage.src = "images/HPhidSBshSML.png";
-    } else if (!result.hideHomepageVideos && result.hideHomepageSidebar) {
-      homepageOptionsImage.src = "images/HPshSBhidSML.png";
-    } else if (!result.hideHomepageVideos && !result.hideHomepageSidebar) {
-      homepageOptionsImage.src = "images/HPshSBshSML.png";
-    }
-  });
+function editHomepage() {
+  homepageContainer.style.display = "block";
+  videoplayerContainer.style.display = "none";
+  helpContainer.style.display = "none";
+  editHomepageButton.className = "switch-modes-selected";
+  editVideoplayerButton.className = "switch-modes";
+  helpButton.className = "switch-modes";
 }
 
-let homepageOptionsImage = document.getElementById("homepageImage");
-let homepageVideosButton = document.getElementById("homepageVideos");
-let homepageSidebarButton = document.getElementById("homepageSidebar");
-let playerEndwallButton = document.getElementById("playerEndwall");
-let playerCommentsButton = document.getElementById("playerComments");
-let playerRelatedButton = document.getElementById("playerRelated");
-let playerLiveChatButton = document.getElementById("playerLiveChat");
+function editVideoplayer() {
+  homepageContainer.style.display = "none";
+  videoplayerContainer.style.display = "block";
+  helpContainer.style.display = "none";
+  editVideoplayerButton.className = "switch-modes-selected";
+  editHomepageButton.className = "switch-modes";
+  helpButton.className = "switch-modes";
+}
+function help() {
+  homepageContainer.style.display = "none";
+  videoplayerContainer.style.display = "none";
+  helpContainer.style.display = "block";
+  editVideoplayerButton.className = "switch-modes";
+  editHomepageButton.className = "switch-modes";
+  helpButton.className = "switch-modes-selected";
+}
+
+function updateHomepageSidebarImage(hide) {
+  if (hide) {
+    homepageSidebarImage.style.visibility = "hidden";
+  } else {
+    homepageSidebarImage.style.visibility = "visible";
+  }
+}
+
+function updateHomepageVideosImage(hide) {
+  if (hide) {
+    homepageVideosImage.style.visibility = "hidden";
+  } else {
+    homepageVideosImage.style.visibility = "visible";
+  }
+}
+
+function updateVideoplayerCommentsImage(hide) {
+  if (hide) {
+    videoplayerCommentsImage.style.visibility = "hidden";
+  } else {
+    videoplayerCommentsImage.style.visibility = "visible";
+  }
+}
+
+function updateVideoplayerEndwallImage(hide) {
+  if (hide) {
+    videoplayerEndwallImage.style.visibility = "hidden";
+  } else {
+    videoplayerEndwallImage.style.visibility = "visible";
+  }
+}
+
+function updateVideoplayerRelatedImage(hide) {
+  if (hide) {
+    videoplayerRelatedImage.style.visibility = "hidden";
+  } else {
+    videoplayerRelatedImage.style.visibility = "visible";
+  }
+}
+let helpContainer = document.getElementById("helpSettings");
+let helpButton = document.getElementById("help");
+let editVideoplayerButton = document.getElementById("editVideoplayer");
+let editHomepageButton = document.getElementById("editHomepage");
+let videoplayerContainer = document.getElementById("videoplayerSettings");
+let homepageContainer = document.getElementById("homepageSettings");
+let homepageVideosImage = document.getElementById("homepageVideos");
+let homepageSidebarImage = document.getElementById("homepageSidebar");
+let videoplayerCommentsImage = document.getElementById("videoplayerComments");
+let videoplayerRelatedImage = document.getElementById("videoplayerRelated");
+let videoplayerEndwallImage = document.getElementById("videoplayerEndwall");
+let homepageVideosButton = document.getElementById("homepageVideosCheckbox");
+let homepageSidebarButton = document.getElementById("homepageSidebarCheckbox");
+let playerEndwallButton = document.getElementById("playerEndwallCheckbox");
+let playerCommentsButton = document.getElementById("playerCommentsCheckbox");
+let playerRelatedButton = document.getElementById("playerRelatedCheckbox");
 
 homepageVideosButton.onclick = function () {
-  toggleSettings("hideHomepageVideos"), toggleHomepageOptionsImage();
+  toggleSettings("hideHomepageVideos");
 };
 homepageSidebarButton.onclick = function () {
-  toggleSettings("hideHomepageSidebar"), toggleHomepageOptionsImage();
+  toggleSettings("hideHomepageSidebar");
 };
 playerEndwallButton.onclick = () => toggleSettings("hidePlayerEndwall");
-playerCommentsButton.onclick = () => toggleSettings("hidePlayerRelated");
-playerRelatedButton.onclick = () => toggleSettings("hidePlayerComments");
-playerLiveChatButton.onclick = () => toggleSettings("hidePlayerLiveChat");
+playerCommentsButton.onclick = () => toggleSettings("hidePlayerComments");
+playerRelatedButton.onclick = () => toggleSettings("hidePlayerRelated");
+editVideoplayerButton.onclick = () => editVideoplayer();
+editHomepageButton.onclick = () => editHomepage();
+helpButton.onclick = () => help();
 //function(){} is the same as () =>
 
 window.onload = function () {
@@ -63,11 +124,92 @@ window.onload = function () {
     playerEndwallButton.checked = result.hidePlayerEndwall;
     playerCommentsButton.checked = result.hidePlayerRelated;
     playerRelatedButton.checked = result.hidePlayerComments;
-    playerLiveChatButton.checked = result.hidePlayerLiveChat;
-    updateHomepageOptionsImage();
+    updateHomepageSidebarImage(result.hideHomepageSidebar);
+    updateHomepageVideosImage(result.hideHomepageVideos);
+    updateVideoplayerRelatedImage(result.hidePlayerRelated);
+    updateVideoplayerEndwallImage(result.hidePlayerEndwall);
+    updateVideoplayerCommentsImage(result.hidePlayerComments);
+    editHomepage();
   });
 };
 
+chrome.storage.onChanged.addListener(function (changes, areaName) {
+  if (changes.hideHomepageSidebar) {
+    updateHomepageSidebarImage(changes.hideHomepageSidebar.newValue);
+  }
+  if (changes.hideHomepageVideos) {
+    updateHomepageVideosImage(changes.hideHomepageVideos.newValue);
+  }
+  if (changes.hidePlayerRelated) {
+    updateVideoplayerRelatedImage(changes.hidePlayerRelated.newValue);
+  }
+  if (changes.hidePlayerEndwall) {
+    updateVideoplayerEndwallImage(changes.hidePlayerEndwall.newValue);
+  }
+  if (changes.hidePlayerComments) {
+    updateVideoplayerCommentsImage(changes.hidePlayerComments.newValue);
+  }
+});
+
+document
+  .querySelector(".hide-videoplayer-endwall")
+  .addEventListener("mouseenter", () => {
+    document.querySelector(".videoplayer-videos-highlight").style.display =
+      "block";
+  });
+document
+  .querySelector(".hide-videoplayer-endwall")
+  .addEventListener("mouseleave", () => {
+    document.querySelector(".videoplayer-videos-highlight").style.display =
+      "none";
+  });
+document
+  .querySelector(".hide-videoplayer-comments")
+  .addEventListener("mouseenter", () => {
+    document.querySelector(".videoplayer-comments-highlight").style.display =
+      "block";
+  });
+document
+  .querySelector(".hide-videoplayer-comments")
+  .addEventListener("mouseleave", () => {
+    document.querySelector(".videoplayer-comments-highlight").style.display =
+      "none";
+  });
+document
+  .querySelector(".hide-videoplayer-related")
+  .addEventListener("mouseenter", () => {
+    document.querySelector(".videoplayer-related-highlight").style.display =
+      "block";
+  });
+document
+  .querySelector(".hide-videoplayer-related")
+  .addEventListener("mouseleave", () => {
+    document.querySelector(".videoplayer-related-highlight").style.display =
+      "none";
+  });
+document
+  .querySelector(".hide-homepage-videos")
+  .addEventListener("mouseenter", () => {
+    document.querySelector(".homepage-videos-highlight").style.display =
+      "block";
+  });
+document
+  .querySelector(".hide-homepage-videos")
+  .addEventListener("mouseleave", () => {
+    document.querySelector(".homepage-videos-highlight").style.display = "none";
+  });
+document
+  .querySelector(".hide-homepage-sidebar")
+  .addEventListener("mouseenter", () => {
+    document.querySelector(".homepage-sidebar-highlight").style.display =
+      "block";
+  });
+document
+  .querySelector(".hide-homepage-sidebar")
+  .addEventListener("mouseleave", () => {
+    document.querySelector(".homepage-sidebar-highlight").style.display =
+      "none";
+  });
 // hide-homepage-videos
 // hide-homepage-sidebar
 // hide-player-endwall

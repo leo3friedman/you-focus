@@ -4,13 +4,22 @@
       background-color: #f5f5f5;
       /* display: flex; */
     }
-    .options {
-      width: 1101px;
-      margin: 0 auto;
+    .menu-options-container {
       display: flex;
-      margin-top: 16px;
+      margin: 0 auto;
+      width: 1095px;
     }
-    .option-homepage {
+
+    .options-container {
+      position: relative;
+    }
+    .options {
+      width: 855px;
+      /* display: flex; */
+      margin-top: 16px;
+      position: absolute;
+    }
+    .page-settings {
       background-color: white;
       padding-top: 32px;
       padding-bottom: 32px;
@@ -19,133 +28,359 @@
       border-style: solid;
       border-color: #d2d2d2;
       border-width: 1px;
+      /* position: absolute; */
     }
-    .option-image {
-      display: flex;
-      padding-right: 32px;
+    .homepage-image {
+      position: relative;
       border-radius: 4px;
+      width: 539px;
+      height: 389px;
     }
+
     .customtomize-page-options {
       display: flex;
     }
-    .change-homepage-videos {
-      display: flex;
+    .homepage-checkboxes {
+      display: block;
       margin-bottom: 16px;
     }
     .change-sidebar {
-      display: flex;
+      display: block;
     }
 
     .informational-text {
-      white-space: normal;
+      white-space: nowrap;
       display: block;
       line-height: 20px;
       vertical-align: top;
       font-size: 16px;
-      margin-right: 16px;
-      padding-left: 25px;
+      margin-left: 16px;
       width: 170px;
     }
 
     .checkbox {
       width: 20px;
       height: 20px;
-      margin-right: 25px;
-      margin-left: 25px;
+      margin-left: 32px;
+      border-radius: 4px;
+    }
+    .checkbox:hover {
+      cursor: pointer;
     }
     .optionButtons {
       display: inline-block;
     }
 
-    .options-header {
-      font-size: 25px;
-      margin-left: 25px;
-      margin-right: 25px;
+    .page-settings-header {
+      font-size: 32px;
+      margin-left: 32px;
+      margin-right: 32px;
+      padding-bottom: 8px;
       border-bottom: 1px solid #dfdfdf;
-      margin-bottom: 12.5px;
-      display: inline-block;
+      margin-bottom: 16px;
+      display: block;
+      font-weight: lighter;
+      margin-top: inherit;
+      white-space: nowrap;
+    }
+
+    .switch-modes-selected {
+      width: 240px;
+      height: 60px;
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: white;
+      border-color: #d2d2d2;
+      border-radius: 4px;
+      border-width: 1px;
+      border-style: solid;
+      border-right: white;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    .switch-modes {
+      width: 240px;
+      height: 60px;
+      display: block;
+      font-size: 16px;
+      border: none;
+      border-right: solid 1px #d2d2d2;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    img.can-change {
+      position: absolute;
+    }
+    .videoplayer-checkboxes {
+      display: block;
+    }
+    .homepage-settings-sidebar {
+      display: block;
+    }
+    .checkbox-and-text {
+      display: flex;
+      padding-bottom: 8px;
+      padding-top: 8px;
     }
     .menu {
-      display: block;
+      margin-top: 16px;
+      margin-right: -1px;
+      z-index: 1;
+    }
+    .switch-modes:hover {
+      background-color: #f7dde1;
+      cursor: pointer;
     }
     .logo {
       margin-bottom: 32px;
     }
-    .switch-modes {
-      width: 150px;
-      height: 50px;
+    .header-text-settings {
+      font-size: 16px;
+      color: #4a4a4a;
+      margin-bottom: 32px;
     }
-    .toggleCheck {
+    .hide-homepage-videos:hover {
+      background-color: #f2f2f2;
+    }
+    .hide-homepage-sidebar:hover {
+      background-color: #f2f2f2;
+    }
+    .hide-videoplayer-related:hover {
+      background-color: #f2f2f2;
+    }
+    .hide-videoplayer-endwall:hover {
+      background-color: #f2f2f2;
+    }
+    .hide-videoplayer-comments:hover {
+      background-color: #f2f2f2;
+    }
+
+    .videoplayer-comments-highlight {
+      display: none;
+    }
+    .videoplayer-related-highlight {
+      display: none;
+    }
+    .videoplayer-videos-highlight {
+      display: none;
+    }
+    .homepage-videos-highlight {
+      display: none;
+    }
+    .homepage-sidebar-highlight {
+      display: none;
+    }
+    .support {
+      display: flex;
+      margin-right: 32px;
+      margin-left: 32px;
+    }
+    .support-questions {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .help-subheader {
+      margin-top: 16px;
+      /* margin-left: 32px; */
+      margin-right: 48px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .informational-text-help {
+      white-space: nowrap;
+      display: block;
+      line-height: 20px;
+      vertical-align: top;
+      font-size: 16px;
+      margin-left: 16px;
+      width: 643px;
+      margin-bottom: 8px;
+    }
+    .has-border-bottom {
+      border-bottom: 1px solid #dfdfdf;
     }
   </style>
   <body>
-    <div class="options">
+    <div class="menu-options-container">
       <div class="menu">
-        <div class="logo">
-          <img src="images/Logo1.png" />
-        </div>
-        <button class="switch-modes">Edit Hopepage</button>
+        <img class="logo" src="Images/Logo1.png" />
+        <h1 class="header-text-settings">SETTINGS</h1>
+        <button id="editHomepage" class="switch-modes">Edit Homepage</button>
+        <button id="editVideoplayer" class="switch-modes">
+          Edit Videoplayer
+        </button>
+        <button id="help" class="switch-modes">
+          Help
+        </button>
       </div>
-      <div class="option-homepage">
-        <div class="costomize-page-options">
-          <h1 class="options-header">Customize Toggle</h1>
-          <div class="change-homepage-videos">
-            <div class="informational-text">Hide Homepage Videos</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="homepageVideos"
-            />
-          </div>
-          <div class="change-sidebar">
-            <div class="informational-text">Clean Up Sidebar</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="homepageSidebar"
-            />
-          </div>
-          <div class="change-sidebar">
-            <div class="informational-text">Hide Player Endwall</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="playerEndwall"
-            />
-          </div>
-          <div class="change-sidebar">
-            <div class="informational-text">Hide Player Comments</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="playerComments"
-            />
-          </div>
-          <div class="change-sidebar">
-            <div class="informational-text">Hide Player Related</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="playerRelated"
-            />
-          </div>
-          <div class="change-sidebar">
-            <div class="informational-text">Hide Player Live Chat</div>
-            <input
-              type="checkbox"
-              checked="true"
-              class="checkbox"
-              id="playerLiveChat"
-            />
+      <div class="option-container">
+        <div id="homepageSettings" class="options">
+          <div class="page-settings">
+            <div class="homepage-settings-sidebar">
+              <h1 class="page-settings-header">Edit Homepage</h1>
+              <div class="homepage-checkboxes">
+                <div class="checkbox-and-text hide-homepage-videos">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="homepageVideosCheckbox"
+                  />
+                  <div class="informational-text">Hide Homepage Videos</div>
+                </div>
+                <div class="checkbox-and-text hide-homepage-sidebar">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="homepageSidebarCheckbox"
+                  />
+                  <div class="informational-text">Clean Up Sidebar</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="homepage-image">
+              <img
+                class="can-change"
+                id="homepage"
+                src="images/HomepageHidden.png"
+              />
+              <img
+                class="can-change"
+                id="homepageSidebar"
+                src="images/HomepageSidebar.png"
+              />
+              <img
+                class="can-change"
+                id="homepageVideos"
+                src="images/HomepageVideos.png"
+              />
+              <img
+                class="can-change homepage-videos-highlight"
+                src="images/HomepageVideosHighlight.png"
+              />
+              <img
+                class="can-change homepage-sidebar-highlight"
+                src="images/HomepageSidebarHighlight.png"
+              />
+            </div>
           </div>
         </div>
-        <div class="option-image">
-          <img id="homepageImage" src="images/HPshSBshSML.png" />
+        <div id="videoplayerSettings" class="options">
+          <div class="page-settings">
+            <div class="homepage-settings-sidebar">
+              <h1 class="page-settings-header">Edit Videoplayer</h1>
+              <div class="videoplayer-checkboxes">
+                <div class="checkbox-and-text hide-videoplayer-endwall">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="playerEndwallCheckbox"
+                  />
+                  <div class="informational-text">
+                    Hide Videoplayer Endwall
+                  </div>
+                </div>
+                <div class="checkbox-and-text hide-videoplayer-comments">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="playerCommentsCheckbox"
+                  />
+                  <div class="informational-text">Hide Comments</div>
+                </div>
+                <div class="checkbox-and-text hide-videoplayer-related">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="playerRelatedCheckbox"
+                  />
+                  <div class="informational-text">Hide Related</div>
+                </div>
+              </div>
+            </div>
+            <div class="homepage-image">
+              <img
+                class="can-change"
+                id="videoplayer"
+                src="images/videoplayerHidden.png"
+              />
+              <img
+                class="can-change"
+                id="videoplayerComments"
+                src="images/videoplayerComments.png"
+              />
+              <img
+                class="can-change"
+                id="videoplayerRelated"
+                src="images/videoplayerRelated.png"
+              />
+              <img
+                class="can-change"
+                id="videoplayerEndwall"
+                src="images/videoplayerVideos.png"
+              />
+              <img
+                class="can-change videoplayer-comments-highlight"
+                src="images/videoplayerCommentsHighlight.png"
+              />
+              <img
+                class="can-change videoplayer-related-highlight"
+                src="images/videoplayerRelatedHighlight.png"
+              />
+              <img
+                class="can-change videoplayer-videos-highlight"
+                src="images/videoplayerVideosHighlight.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="options-container">
+        <div id="helpSettings" class="options">
+          <div class="page-settings">
+            <div>
+              <h1 class="page-settings-header">Help</h1>
+              <div class="support has-border-bottom">
+                <div class="help-subheader">SUPPORT</div>
+                <div class="support-questions">
+                  <div class="informational-text-help">
+                    Have any questions?
+                  </div>
+                  <div class="informational-text-help">
+                    Found a bug?
+                  </div>
+                  <div class="informational-text-help">
+                    Have any feedback?
+                  </div>
+                  <div class="informational-text-help">
+                    Email me: leo@fourfriedmans.com
+                  </div>
+                </div>
+              </div>
+              <div class="support has-border-bottom">
+                <div class="help-subheader">PRIVACY</div>
+                <div class="support-questions">
+                  <div class="informational-text-help">
+                    Please read our privacy policy:
+                  </div>
+                </div>
+              </div>
+              <div class="support">
+                <div class="help-subheader">SETTINGS</div>
+                <div class="support-questions">
+                  <div class="informational-text-help">
+                    Messed up settings?
+                  </div>
+                  <div class="informational-text-help">
+                    Restore to default
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
