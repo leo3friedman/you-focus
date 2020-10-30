@@ -11,12 +11,12 @@ styles for when user has asked to hide distractions
 ***************************************/
 
 /* "upnext" next to autoplay toggle */
-body.yf-hide #upnext,
+body.yf-hide . #upnext,
 body.yf-hide ytd-banner-promo-renderer,
-body.yf-hide ytd-rich-grid-renderer,
+body.yf-hide .homepage-videos-hide ytd-rich-grid-renderer,
 body.yf-hide grid-title,
-body.yf-hide ytd-video-masthead-ad-v3-renderer,
-body.yf-hide ytd-mini-guide-renderer,
+body.yf-hide .homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
+body.yf-hide .homepage-sidebar-hide ytd-mini-guide-renderer,
 /* body.yf-hide #guide-content, */
 body.yf-hide .videowall-endscreen {
   visibility: hidden;
