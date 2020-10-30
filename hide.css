@@ -11,32 +11,33 @@ styles for when user has asked to hide distractions
 ***************************************/
 
 /* "upnext" next to autoplay toggle */
-body.yf-hide . #upnext,
-body.yf-hide ytd-banner-promo-renderer,
-body.yf-hide .homepage-videos-hide ytd-rich-grid-renderer,
-body.yf-hide grid-title,
-body.yf-hide .homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
-body.yf-hide .homepage-sidebar-hide ytd-mini-guide-renderer,
-/* body.yf-hide #guide-content, */
-body.yf-hide .videowall-endscreen {
+
+/* body.yf-hide ytd-banner-promo-renderer,
+body.yf-hide grid-title, */
+body.yf-hide.homepage-videos-hide ytd-rich-grid-renderer,
+body.yf-hide.homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
+body.yf-hide.homepage-sidebar-hide ytd-mini-guide-renderer,
+body.yf-hide.videoplayer-endwall-hide .videowall-endscreen,
+body.yf-hide.videoplayer-related-hide #upnext {
   visibility: hidden;
 }
 
 /* Hide everything but settings */
-body.yf-hide
+body.yf-hide.homepage-sidebar-hide
   ytd-guide-section-renderer:first-child
   #items
   > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(3)),
-body.yf-hide
+body.yf-hide.homepage-sidebar-hide
   ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
   display: none;
 }
 
-body.yf-hide #items.ytd-watch-next-secondary-results-renderer,
+body.yf-hide.videoplayer-related-hide #items.ytd-watch-next-secondary-results-renderer,
 /* video below autoplay */
-body.yf-hide #contents.ytd-compact-autoplay-renderer,
+body.yf-hide.videoplayer-related-hide #contents.ytd-compact-autoplay-renderer,
 /* Ad above autoplay */
-body.yf-hide #companion {
+body.yf-hide.videoplayer-related-hide #companion,
+body.yf-hide.videoplayer-comments-hide .ytd-comments {
   display: none;
 }
 
