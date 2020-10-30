@@ -136,18 +136,23 @@ window.onload = function () {
 chrome.storage.onChanged.addListener(function (changes, areaName) {
   if (changes.hideHomepageSidebar) {
     updateHomepageSidebarImage(changes.hideHomepageSidebar.newValue);
+    homepageSidebarButton.checked = changes.hideHomepageSidebar.newValue;
   }
   if (changes.hideHomepageVideos) {
     updateHomepageVideosImage(changes.hideHomepageVideos.newValue);
+    homepageVideosButton.checked = changes.hideHomepageVideos.newValue;
   }
   if (changes.hidePlayerRelated) {
     updateVideoplayerRelatedImage(changes.hidePlayerRelated.newValue);
+    playerRelatedButton.checked = changes.hidePlayerComments.newValue;
   }
   if (changes.hidePlayerEndwall) {
     updateVideoplayerEndwallImage(changes.hidePlayerEndwall.newValue);
+    playerEndwallButton.checked = changes.hidePlayerEndwall.newValue;
   }
   if (changes.hidePlayerComments) {
     updateVideoplayerCommentsImage(changes.hidePlayerComments.newValue);
+    playerCommentsButton.checked = changes.hidePlayerRelated.newValue;
   }
 });
 
