@@ -86,6 +86,7 @@ function updateVideoplayerRelatedImage(hide) {
     videoplayerRelatedImage.style.visibility = "visible";
   }
 }
+let refreshButton = document.getElementById("refresh");
 let helpContainer = document.getElementById("helpSettings");
 let helpButton = document.getElementById("help");
 let editVideoplayerButton = document.getElementById("editVideoplayer");
@@ -115,6 +116,8 @@ playerRelatedButton.onclick = () => toggleSettings("hidePlayerRelated");
 editVideoplayerButton.onclick = () => editVideoplayer();
 editHomepageButton.onclick = () => editHomepage();
 helpButton.onclick = () => help();
+refreshButton.onclick = () => resetSettings();
+
 //function(){} is the same as () =>
 
 window.onload = function () {
@@ -122,8 +125,8 @@ window.onload = function () {
     homepageVideosButton.checked = result.hideHomepageVideos;
     homepageSidebarButton.checked = result.hideHomepageSidebar;
     playerEndwallButton.checked = result.hidePlayerEndwall;
-    playerCommentsButton.checked = result.hidePlayerRelated;
-    playerRelatedButton.checked = result.hidePlayerComments;
+    playerCommentsButton.checked = result.hidePlayerComments;
+    playerRelatedButton.checked = result.hidePlayerRelated;
     updateHomepageSidebarImage(result.hideHomepageSidebar);
     updateHomepageVideosImage(result.hideHomepageVideos);
     updateVideoplayerRelatedImage(result.hidePlayerRelated);
@@ -144,7 +147,7 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   }
   if (changes.hidePlayerRelated) {
     updateVideoplayerRelatedImage(changes.hidePlayerRelated.newValue);
-    playerRelatedButton.checked = changes.hidePlayerComments.newValue;
+    playerRelatedButton.checked = changes.hidePlayerRelated.newValue;
   }
   if (changes.hidePlayerEndwall) {
     updateVideoplayerEndwallImage(changes.hidePlayerEndwall.newValue);
@@ -152,7 +155,7 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   }
   if (changes.hidePlayerComments) {
     updateVideoplayerCommentsImage(changes.hidePlayerComments.newValue);
-    playerCommentsButton.checked = changes.hidePlayerRelated.newValue;
+    playerCommentsButton.checked = changes.hidePlayerComments.newValue;
   }
 });
 
@@ -215,6 +218,11 @@ document
     document.querySelector(".homepage-sidebar-highlight").style.display =
       "none";
   });
+
+function resetSettings() {
+  chrome.storage.sync.set(defaultSettings, () => window.location.reload());
+}
+
 // hide-homepage-videos
 // hide-homepage-sidebar
 // hide-player-endwall
