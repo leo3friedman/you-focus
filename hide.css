@@ -9,11 +9,6 @@ body {
 /*************************************
 styles for when user has asked to hide distractions
 ***************************************/
-
-/* "upnext" next to autoplay toggle */
-
-/* body.yf-hide ytd-banner-promo-renderer,
-body.yf-hide grid-title, */
 body.yf-hide.homepage-videos-hide ytd-rich-grid-renderer,
 body.yf-hide.homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
 body.yf-hide.homepage-sidebar-hide ytd-mini-guide-renderer,
@@ -21,7 +16,6 @@ body.yf-hide.videoplayer-endwall-hide .videowall-endscreen,
 body.yf-hide.videoplayer-related-hide #upnext {
   visibility: hidden;
 }
-
 /* Hide everything but settings */
 body.yf-hide.homepage-sidebar-hide
   ytd-guide-section-renderer:first-child
@@ -41,18 +35,10 @@ body.yf-hide.videoplayer-comments-hide .ytd-comments {
   display: none;
 }
 
-/* work on ad hider */
-body.yf-hide-ad ytd-video-masthead-ad-v3-renderer,
-body.yf-hide-ad ytd-action-companion-ad-renderer,
-body.yf-hide-ad .ytd-player-legacy-desktop-watch-ads-renderer,
-body.yf-hide-ad ytd-promoted-sparkles-web-renderer {
+/* Hiding some popup ads by default*/
+body.yf-hide ytd-video-masthead-ad-v3-renderer,
+body.yf-hide ytd-action-companion-ad-renderer,
+body.yf-hide .ytd-player-legacy-desktop-watch-ads-renderer,
+body.yf-hide ytd-promoted-sparkles-web-renderer {
   display: none;
 }
-
-/* body.yf-hideAd
-body.yf-hideAd  */
-/* hides trending..etch*/
-/* body.yf-hide ytd-browse[page-subtype="channels"], */
-/* body.yf-hide #contentContainer, */
-/* body.yf-hide #guide-icon, */
-/* body.yf-hide #items, */

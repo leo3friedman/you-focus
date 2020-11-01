@@ -6,13 +6,6 @@ function hideDistractions() {
   document.body.classList.add("yf-hide");
 }
 
-// Work on ad hider
-function hideAds() {
-  document.body.classList.add("yf-hide-ad");
-}
-function showAds() {
-  document.body.classList.remove("yf-hide-ad");
-}
 function disableAutoplay() {
   const autoplayOnButton = document.querySelector(
     "paper-toggle-button[aria-pressed='true']"
@@ -36,16 +29,12 @@ const defaultSettings = {
   hidePlayerRelated: true,
   hidePlayerComments: false,
   isShowing: true,
-  adShowing: true,
 };
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
     if (result.isShowing === false) {
       hideDistractions();
       disableAutoplay();
-    }
-    if (result.adShowing === false) {
-      hideAds();
     }
     // Special case because it was popping up on refresh
     showElement("#guide-content");
@@ -65,13 +54,6 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
       disableAutoplay();
     } else {
       showDistractions();
-    }
-  }
-  if (changes.adShowing !== undefined) {
-    if (changes.adShowing.newValue === false) {
-      hideAds();
-    } else {
-      showAds();
     }
   }
 });
@@ -127,4 +109,3 @@ function updateVideoplayerCommentsClass(val) {
     document.body.classList.remove("videoplayer-comments-hide");
   }
 }
-// functions for options
