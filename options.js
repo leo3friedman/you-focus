@@ -222,10 +222,3 @@ document
 function resetSettings() {
   chrome.storage.sync.set(defaultSettings, () => window.location.reload());
 }
-
-// hide-homepage-videos
-// hide-homepage-sidebar
-// hide-player-endwall
-// hide-player-comments
-// hide-player-live-chat
-// hide-player-related

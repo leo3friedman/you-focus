@@ -2,15 +2,8 @@
   "name": "YouFocus",
   "version": "0.3",
   "description": "Hides Distracting Content on YouTube",
-  "permissions": [
-    "storage",
-    "webRequest",
-    "webRequestBlocking",
-    "*://*.youtube.com/*"
-  ],
-  "background": {
-    "scripts": ["background.js"]
-  },
+  "permissions": ["storage"],
+
   "content_scripts": [
     {
       "matches": ["*://www.youtube.com/*"],

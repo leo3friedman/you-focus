@@ -31,7 +31,7 @@
       }
 
       .informational-text {
-        white-space: nowrap;
+        white-space: normal;
         display: inline-block;
         line-height: 20px;
         vertical-align: top;
@@ -73,6 +73,9 @@
       div.ad-hider {
         padding-top: 8px;
       }
+      .toggle:hover {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -85,21 +88,11 @@
       </div>
     </header>
     <div class="setting">
-      <div class="informational-text">Hide Distractions <br /></div>
+      <div class="informational-text">Hide Distractions on YouTube<br /></div>
       <button class="toggle" id="alterDistractions">
         <div class="toggle-circle"></div>
       </button>
     </div>
-
-    <div class="ad-hider">
-      <div class="informational-text">Adblocker<br /></div>
-      <button class="toggle" id="alterAds">
-        <div class="toggle-circle"></div>
-      </button>
-    </div>
-
-    <!-- experimenting with options page -->
-
     <script src="popup.js"></script>
   </body>
 </html>

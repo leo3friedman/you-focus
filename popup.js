@@ -22,7 +22,6 @@ function handleClick(event) {
 alterDistractionsButton.onclick = handleClick;
 
 // Working on options page
-
 let openOptionsPageButton = document.getElementById("openOptionsPage");
 
 function openOptionPageOnClick(event) {
@@ -33,30 +32,6 @@ function openOptionPageOnClick(event) {
 
 openOptionsPageButton.onclick = openOptionPageOnClick;
 
-// Working on the ad hiding button
-let adShowing = true;
-
-let alterAdsButton = document.getElementById("alterAds");
-
-function doAdToggle(adShowing) {
-  if (adShowing) {
-    alterAdsButton.className = "toggle toggle-off";
-  } else {
-    alterAdsButton.className = "toggle toggle-on";
-  }
-}
-
-function handleAdClick(event) {
-  chrome.storage.sync.get({ adShowing: true }, function (result) {
-    let adShowing = result.adShowing;
-    adShowing = !adShowing;
-    chrome.storage.sync.set({ adShowing: adShowing });
-    doAdToggle(adShowing);
-  });
-}
-
-alterAdsButton.onclick = handleAdClick;
-
 window.onload = function () {
   chrome.storage.sync.get({ isShowing: true, adShowing: true }, function (
     result
@@ -65,13 +40,6 @@ window.onload = function () {
       alterDistractionsButton.className = "toggle toggle-off";
     } else {
       alterDistractionsButton.className = "toggle toggle-on";
-    }
-
-    // For ad Hiding
-    if (result.adShowing) {
-      alterAdsButton.className = "toggle toggle-off";
-    } else {
-      alterAdsButton.className = "toggle toggle-on";
     }
   });
 };
