@@ -1,8 +1,9 @@
 {
   "name": "YouFocus",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Hide YouTube distractions with a single click",
   "permissions": ["storage"],
+
   "content_scripts": [
     {
       "matches": ["*://www.youtube.com/*"],
