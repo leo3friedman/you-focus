@@ -36,9 +36,14 @@ body.yf-hide.videoplayer-comments-hide .ytd-comments {
 }
 
 /* Hiding some popup ads by default*/
+/* body.yf-hide .ytp-ad-text-overlay */
+/* body.yf-hide .ytp-ad-overlay-image, */
+body.yf-hide .ytp-ad-overlay-container,
+body.yf-hide ytd-promoted-video-renderer,
 body.yf-hide ytd-video-masthead-ad-v3-renderer,
 body.yf-hide ytd-action-companion-ad-renderer,
 body.yf-hide .ytd-player-legacy-desktop-watch-ads-renderer,
+body.yf-hide ytd-promoted-sparkles-text-search-renderer,
 body.yf-hide ytd-promoted-sparkles-web-renderer {
   display: none;
 }
