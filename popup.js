@@ -43,5 +43,3 @@ window.onload = function () {
     }
   });
 };
-
-// something new

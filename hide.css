@@ -6,10 +6,6 @@ body {
   visibility: hidden;
 }
 
-/*************************************
-styles for when user has asked to hide distractions
-***************************************/
-
 body.yf-hide.homepage-videos-hide ytd-rich-grid-renderer,
 body.yf-hide.homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
 body.yf-hide.homepage-sidebar-hide ytd-mini-guide-renderer,
@@ -22,7 +18,6 @@ body.yf-hide.homepage-sidebar-hide
   ytd-guide-section-renderer:first-child
   #items
   > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(3)),
-
 body.yf-hide.homepage-sidebar-hide
   ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
   display: none;
@@ -38,8 +33,8 @@ body.yf-hide.videoplayer-comments-hide .ytd-comments {
 }
 
 /* Hiding some popup ads by default*/
-/* body.yf-hide .ytp-ad-text-overlay */
-/* body.yf-hide .ytp-ad-overlay-image, */
+body.yf-hide .ytp-ad-text-overlay,
+body.yf-hide .ytp-ad-overlay-image,
 body.yf-hide .ytp-ad-overlay-container,
 body.yf-hide ytd-promoted-video-renderer,
 body.yf-hide ytd-video-masthead-ad-v3-renderer,
@@ -49,14 +44,3 @@ body.yf-hide ytd-promoted-sparkles-text-search-renderer,
 body.yf-hide ytd-promoted-sparkles-web-renderer {
   display: none;
 }
-
-/* work on ad hider */
-body.yf-hide-ad ytd-video-masthead-ad-v3-renderer,
-body.yf-hide-ad ytd-action-companion-ad-renderer,
-body.yf-hide-ad .ytd-player-legacy-desktop-watch-ads-renderer,
-body.yf-hide-ad ytd-promoted-sparkles-web-renderer {
-  display: none;
-}
-
-/* body.yf-hideAd
-body.yf-hideAd  */
