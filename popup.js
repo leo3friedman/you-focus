@@ -26,10 +26,9 @@ let openOptionsPageButton = document.getElementById("openOptionsPage");
 
 function openOptionPageOnClick(event) {
   chrome.tabs.create({
-    url: "chrome-extension://kdnhalmldomdjpafllbpkanfiihlaclb/options.html",
+    url: "options.html",
   });
 }
-
 openOptionsPageButton.onclick = openOptionPageOnClick;
 
 window.onload = function () {
