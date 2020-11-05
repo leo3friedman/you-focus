@@ -232,6 +232,19 @@
       color: #00a1ff;
       cursor: pointer;
     }
+    .mailto-link {
+      background-color: transparent;
+      color: #3367d6;
+      font-size: 16px;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      padding: 0px;
+      border: none;
+      text-decoration: underline;
+    }
+    .mailto-link:hover {
+      color: #00a1ff;
+      cursor: pointer;
+    }
   </style>
   <body>
     <div class="menu-options-container">
@@ -388,7 +401,10 @@
                     Have any feedback?
                   </div>
                   <div class="informational-text-help">
-                    Email: <strong>youfocushelp@gmail.com</strong>
+                    Email:
+                    <a class="mailto-link" href="mailto:youfocushelp@gmail.com">
+                      youfocushelp@gmail.com
+                    </a>
                   </div>
                 </div>
               </div>
@@ -396,7 +412,7 @@
                 <div class="help-subheader">SETTINGS</div>
                 <div class="support-questions">
                   <div class="informational-text-help">
-                    Messed up settings?
+                    Reset preferences?
                   </div>
                   <div class="informational-text-help restore-to-default">
                     <button id="refresh" class="refresh-button">Restore</button>
