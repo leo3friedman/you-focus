@@ -144,19 +144,7 @@
       color: #4a4a4a;
       margin-bottom: 32px;
     }
-    .hide-homepage-videos:hover {
-      background-color: #f2f2f2;
-    }
-    .hide-homepage-sidebar:hover {
-      background-color: #f2f2f2;
-    }
-    .hide-videoplayer-related:hover {
-      background-color: #f2f2f2;
-    }
-    .hide-videoplayer-endwall:hover {
-      background-color: #f2f2f2;
-    }
-    .hide-videoplayer-comments:hover {
+    .checkbox-and-text:hover {
       background-color: #f2f2f2;
     }
 
@@ -173,6 +161,9 @@
       display: none;
     }
     .homepage-sidebar-highlight {
+      display: none;
+    }
+    .videoplayer-autoplay-highlight {
       display: none;
     }
     .support {
@@ -335,6 +326,14 @@
                   />
                   <div class="informational-text">Hide Related</div>
                 </div>
+                <div class="checkbox-and-text hide-videoplayer-autoplay">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    id="playerAutoplayCheckbox"
+                  />
+                  <div class="informational-text">Disable Autoplay</div>
+                </div>
                 <div class="checkbox-and-text hide-videoplayer-comments">
                   <input
                     type="checkbox"
@@ -363,6 +362,11 @@
               />
               <img
                 class="can-change"
+                id="videoplayerAutoplay"
+                src="images/videoplayerAutoplay.png"
+              />
+              <img
+                class="can-change"
                 id="videoplayerEndwall"
                 src="images/videoplayerVideos.png"
               />
@@ -373,6 +377,10 @@
               <img
                 class="can-change videoplayer-related-highlight"
                 src="images/videoplayerRelatedHighlight.png"
+              />
+              <img
+                class="can-change videoplayer-autoplay-highlight"
+                src="images/videoplayerAutoplayHighlight.png"
               />
               <img
                 class="can-change videoplayer-videos-highlight"
