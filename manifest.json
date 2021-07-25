@@ -1,6 +1,6 @@
 {
   "name": "YouFocus - Hide YouTube Distractions",
-  "version": "0.7",
+  "version": "0.8",
   "options_page": "options.html",
   "description": "Hide YouTube suggested videos, comments, and more with a single click",
   "permissions": ["storage"],
