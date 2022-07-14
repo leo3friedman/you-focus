@@ -38,7 +38,7 @@
         display: inline-block;
         line-height: 20px;
         vertical-align: top;
-        font-size: 16px;
+        font-size: 14px;
         margin-right: 16px;
       }
       /* button */
@@ -51,6 +51,7 @@
         width: 39px;
         background-color: #eceff1;
         display: inline-block;
+        float: right;
       }
       .toggle-circle {
         height: 20px;
@@ -82,25 +83,65 @@
         padding-bottom: 8px;
         border-bottom: 1px solid #dfdfdf;
       }
+      ol{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      li{
+        margin-bottom: 8px;
+      }
     </style>
   </head>
   <body>
     <header>
-      <img src="images/Logo1.png" />
+      <img src="images/yf-header.svg" />
 <!--      <div class="options">-->
 <!--        <button class="icon-button" id="openOptionsPage">-->
 <!--          <img src="images/more-vertical.svg" />-->
 <!--        </button>-->
 <!--      </div>-->
-    </header>
-    <div class="popup-body">
-      <div class="informational-text">
-        Hide Distractions<br />
-        on YouTube
-      </div>
-      <button class="toggle" id="alterDistractions">
+      <button class="toggle" id="hideMode">
         <div class="toggle-circle"></div>
       </button>
+    </header>
+    <div class="popup-body">
+      <ol>
+        <li><div class="informational-text">
+          Hide Home Feed
+        </div>
+          <button class="toggle" id="hideHomepageVideos">
+            <div class="toggle-circle"></div>
+          </button></li>
+        <li><div class="informational-text">
+          Clean Up Sidebar
+        </div>
+          <button class="toggle" id="hideHomepageSidebar">
+            <div class="toggle-circle"></div>
+          </button></li>
+        <li><div class="informational-text">
+          Hide Video Related
+        </div>
+          <button class="toggle" id="hidePlayerRelated">
+            <div class="toggle-circle"></div>
+          </button></li>
+        <li><div class="informational-text">
+          Hide Video Endwall
+        </div>
+          <button class="toggle" id="hidePlayerEndwall">
+            <div class="toggle-circle"></div>
+          </button></li>
+        <li><div class="informational-text">
+          Hide Comments
+        </div>
+          <button class="toggle" id="hidePlayerComments">
+            <div class="toggle-circle"></div>
+          </button></li>
+
+      </ol>
+
+
+
 
     </div>
     <button class="settings-button" id="openOptionsPage">Settings</button>

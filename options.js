@@ -6,10 +6,11 @@ let hidePlayerComments = false;
 let hidePlayerLiveChat = false;
 
 const defaultSettings = {
+  hideMode: false,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
-  hidePlayerEndwall: true,
   hidePlayerRelated: true,
+  hidePlayerEndwall: true,
   hidePlayerComments: false,
 };
 

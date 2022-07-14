@@ -6,7 +6,6 @@ function hideDistractions() {
   document.body.classList.add("yf-hide");
 }
 
-
 function showElement(elementSelector, display) {
   let selectedElement = document.querySelector(elementSelector);
   if (selectedElement) {
@@ -15,18 +14,20 @@ function showElement(elementSelector, display) {
 }
 // hideElement("body");
 const defaultSettings = {
+  hideMode: false,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
-  hidePlayerEndwall: true,
   hidePlayerRelated: true,
+  hidePlayerEndwall: true,
   hidePlayerComments: false,
   isShowing: true,
 };
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
-    if (result.isShowing === false) {
-      hideDistractions();
-    }
+    // if (result.isShowing === false) {
+    //   hideDistractions();
+    // }
+    alterVisibility("hideMode", result.hideMode)
     updateHomepageSidebarClass(result.hideHomepageSidebar);
     updateHomepageVideosClass(result.hideHomepageVideos);
     updateVideoplayerRelatedClass(result.hidePlayerRelated);
@@ -38,16 +39,36 @@ window.onload = function () {
   });
 };
 
+// chrome.storage.onChanged.addListener(function (changes, areaName) {
+//   if (changes.isShowing !== undefined) {
+//     if (changes.isShowing.newValue === false) {
+//       hideDistractions();
+//     } else {
+//       showDistractions();
+//     }
+//   }
+// });
+function alterVisibility(change, newValue) {
+  newValue ? document.body.classList.add(change) : document.body.classList.remove(change);
+}
+
 chrome.storage.onChanged.addListener(function (changes, areaName) {
   if (changes.isShowing !== undefined) {
-    if (changes.isShowing.newValue === false) {
-      hideDistractions();
-    } else {
-      showDistractions();
-    }
+    changes.isShowing.newValue ? showDistractions() : hideDistractions();
   }
-});
-chrome.storage.onChanged.addListener(function (changes, areaName) {
+  if(changes.hideMode){
+    const change = Object.keys(changes)[0]
+    console.log(change)
+    const newValue = changes[change].newValue
+    alterVisibility(change, newValue)
+  }
+
+  // console.log(change)
+  // console.log(newValue)
+
+  // alterVisibility(change, newValue);
+
+
   if (changes.hideHomepageSidebar) {
     updateHomepageSidebarClass(changes.hideHomepageSidebar.newValue);
   }

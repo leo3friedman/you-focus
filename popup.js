@@ -1,25 +1,28 @@
-let isShowing = true;
+let alterDistractionsButton = document.getElementById("hideMode");
 
-let alterDistractionsButton = document.getElementById("alterDistractions");
-
-function doToggle(isShowing) {
-  if (isShowing) {
-    alterDistractionsButton.className = "toggle toggle-off";
-  } else {
-    alterDistractionsButton.className = "toggle toggle-on";
-  }
-}
+const defaultSettings = {
+  hideMode: false,
+  hideHomepageVideos: true,
+  hideHomepageSidebar: true,
+  hidePlayerRelated: true,
+  hidePlayerEndwall: true,
+  hidePlayerComments: false,
+  isShowing: true,
+};
 
 function handleClick(event) {
-  chrome.storage.sync.get({ isShowing: true }, function (result) {
-    let isShowing = result.isShowing;
-    isShowing = !isShowing;
-    chrome.storage.sync.set({ isShowing: isShowing });
-    doToggle(isShowing);
+  const id = this.id;
+  let button = this;
+  chrome.storage.sync.get(defaultSettings, function (result) {
+    const newValue = !result[id];
+    chrome.storage.sync.set({[id]: newValue});
+    button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
+    // doToggle(newValue);
   });
 }
 
-alterDistractionsButton.onclick = handleClick;
+// alterDistractionsButton.onclick = handleClick;
+
 
 // Working on options page
 let openOptionsPageButton = document.getElementById("openOptionsPage");
@@ -32,13 +35,14 @@ function openOptionPageOnClick(event) {
 openOptionsPageButton.onclick = openOptionPageOnClick;
 
 window.onload = function () {
-  chrome.storage.sync.get({ isShowing: true, adShowing: true }, function (
+  chrome.storage.sync.get(defaultSettings, function (
     result
   ) {
-    if (result.isShowing) {
-      alterDistractionsButton.className = "toggle toggle-off";
-    } else {
-      alterDistractionsButton.className = "toggle toggle-on";
-    }
+    // alterDistractionsButton.className = result.hideMode ? "toggle toggle-on" : "toggle toggle-off";
+    document.querySelectorAll(".toggle").forEach( function (element) {
+      element.className = result[element.id] ? "toggle toggle-on" : "toggle toggle-off"
+      element.onclick = handleClick;
+    })
+
   });
 };
