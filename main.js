@@ -6,22 +6,6 @@ function hideDistractions() {
   document.body.classList.add("yf-hide");
 }
 
-function updateAutoplay() {
-  chrome.storage.sync.get(defaultSettings, function (result) {
-    if (result.hidePlayerAutoplay) {
-      disableAutoplay();
-    }
-  });
-}
-
-function disableAutoplay() {
-  const autoplayOnButton = document.querySelector(
-    "paper-toggle-button[aria-pressed='true']"
-  );
-  if (autoplayOnButton) {
-    autoplayOnButton.click();
-  }
-}
 
 function showElement(elementSelector, display) {
   let selectedElement = document.querySelector(elementSelector);
@@ -36,21 +20,18 @@ const defaultSettings = {
   hidePlayerEndwall: true,
   hidePlayerRelated: true,
   hidePlayerComments: false,
-  hidePlayerAutoplay: true,
   isShowing: true,
 };
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
     if (result.isShowing === false) {
       hideDistractions();
-      updateAutoplay();
     }
     updateHomepageSidebarClass(result.hideHomepageSidebar);
     updateHomepageVideosClass(result.hideHomepageVideos);
     updateVideoplayerRelatedClass(result.hidePlayerRelated);
     updateVideoplayerEndwallClass(result.hidePlayerEndwall);
     updateVideoplayerCommentsClass(result.hidePlayerComments);
-    updateVideoplayerAutoplayClass(result.hidePlayerAutoplay);
     // Special case because it was popping up on refresh
     showElement("#guide-content");
     showElement("body", "block");
@@ -61,7 +42,6 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   if (changes.isShowing !== undefined) {
     if (changes.isShowing.newValue === false) {
       hideDistractions();
-      updateAutoplay();
     } else {
       showDistractions();
     }
@@ -82,10 +62,6 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   }
   if (changes.hidePlayerComments) {
     updateVideoplayerCommentsClass(changes.hidePlayerComments.newValue);
-  }
-  if (changes.hidePlayerAutoplay) {
-    updateVideoplayerAutoplayClass(changes.hidePlayerAutoplay.newValue);
-    updateAutoplay();
   }
 });
 function updateHomepageSidebarClass(val) {
@@ -121,12 +97,5 @@ function updateVideoplayerCommentsClass(val) {
     document.body.classList.add("videoplayer-comments-hide");
   } else {
     document.body.classList.remove("videoplayer-comments-hide");
-  }
-}
-function updateVideoplayerAutoplayClass(val) {
-  if (val) {
-    document.body.classList.add("videoplayer-autoplay-hide");
-  } else {
-    document.body.classList.remove("videoplayer-autoplay-hide");
   }
 }
