@@ -16,8 +16,7 @@ body.yf-hide.homepage-sidebar-hide
   display: none;
 }
 
-body.yf-hide.videoplayer-related-hide
-  .ytd-watch-next-secondary-results-renderer:not(:first-child),
+body.yf-hide.videoplayer-related-hide #related,
 body.yf-hide.videoplayer-autoplay-hide ytd-compact-autoplay-renderer,
 body.yf-hide.videoplayer-comments-hide .ytd-comments,
 body.yf-hide.homepage-videos-hide ytd-rich-grid-renderer,
