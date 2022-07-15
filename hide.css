@@ -7,21 +7,21 @@ body {
 }
 
 /* Hide everything but settings */
-body.hideMode.homepage-sidebar-hide
+body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:first-child
   #items
   > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(4)),
-body.hideMode.homepage-sidebar-hide
+body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
   display: none;
 }
 
-body.hideMode.videoplayer-related-hide #related,
-body.hideMode.videoplayer-comments-hide .ytd-comments,
-body.hideMode.homepage-videos-hide ytd-rich-grid-renderer,
-body.hideMode.homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
-body.hideMode.homepage-sidebar-hide .ytd-mini-guide-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
-body.hideMode.videoplayer-endwall-hide .videowall-endscreen {
+body.hideMode.hidePlayerRelated #related,
+body.hideMode.hidePlayerComments .ytd-comments,
+body.hideMode.hideHomepageVideos ytd-rich-grid-renderer,
+body.hideMode.hideHomepageVideos ytd-video-masthead-ad-v3-renderer,
+body.hideMode.hideHomepageSidebar .ytd-mini-guide-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
+body.hideMode.hidePlayerEndwall .videowall-endscreen {
   display: none;
 }
 
