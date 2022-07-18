@@ -82,7 +82,6 @@
       }
       .popup-body{
         margin-bottom: 16px;
-        padding-bottom: 8px;
         border-bottom: 1px solid #dfdfdf;
       }
       ol{
@@ -93,6 +92,11 @@
       li{
         margin-bottom: 8px;
       }
+      #hideMode.toggle-on .toggle-circle{
+        background-color: #E33E2A;
+        transform: translateX(19px);
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -102,7 +106,8 @@
         <div class="toggle-circle"></div>
       </button>
     </header>
-    <div class="popup-body">
+    <div class="popup-body" >
+      <div id="titleWrap" title="Extension Disabled">
       <ol>
         <li><div class="informational-text">
           Hide Home Feed
@@ -134,12 +139,8 @@
           <button class="toggle" id="hidePlayerComments">
             <div class="toggle-circle"></div>
           </button></li>
-
       </ol>
-
-
-
-
+      </div>
     </div>
     <button class="settings-button" id="openOptionsPage">Settings</button>
     <script src="popup.js"></script>

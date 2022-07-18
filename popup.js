@@ -1,5 +1,3 @@
-let alterDistractionsButton = document.getElementById("hideMode");
-
 const defaultSettings = {
   hideMode: false,
   hideHomepageVideos: true,
@@ -10,29 +8,22 @@ const defaultSettings = {
   isShowing: true,
 };
 
-function handleClick(event) {
+function setPopupState(hideMode){
+  document.getElementById("titleWrap").title = hideMode ? "" : "Extension disabled";
+  document.querySelector("ol").style.pointerEvents = hideMode ? "auto" : "none";
+  document.querySelector("ol").style.opacity = hideMode ? "1.0" : "0.4";
+}
+
+function handleClick() {
   const id = this.id;
   let button = this;
   chrome.storage.sync.get(defaultSettings, function (result) {
     const newValue = !result[id];
     chrome.storage.sync.set({[id]: newValue});
     button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
-    // doToggle(newValue);
+    if(id === "hideMode") setPopupState(newValue);
   });
 }
-
-// alterDistractionsButton.onclick = handleClick;
-
-
-// Working on options page
-let openOptionsPageButton = document.getElementById("openOptionsPage");
-
-function openOptionPageOnClick(event) {
-  chrome.tabs.create({
-    url: "options.html",
-  });
-}
-openOptionsPageButton.onclick = openOptionPageOnClick;
 
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (
@@ -43,6 +34,6 @@ window.onload = function () {
       element.className = result[element.id] ? "toggle toggle-on" : "toggle toggle-off"
       element.onclick = handleClick;
     })
-
+    setPopupState(result.hideMode)
   });
 };
