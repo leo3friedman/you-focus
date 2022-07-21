@@ -1,11 +1,10 @@
 const defaultSettings = {
-  hideMode: false,
+  hideMode: true,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
   hidePlayerRelated: true,
   hidePlayerEndwall: true,
   hidePlayerComments: false,
-  isShowing: true,
 };
 /**
  * Hides/shows certain elements on the page by adding/removing classes to the page. Refer to hide.css to see what added

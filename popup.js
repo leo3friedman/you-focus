@@ -1,11 +1,10 @@
 const defaultSettings = {
-  hideMode: false,
+  hideMode: true,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
   hidePlayerRelated: true,
   hidePlayerEndwall: true,
   hidePlayerComments: false,
-  isShowing: true,
 };
 
 function setPopupState(hideMode){
@@ -29,7 +28,6 @@ window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (
     result
   ) {
-    // alterDistractionsButton.className = result.hideMode ? "toggle toggle-on" : "toggle toggle-off";
     document.querySelectorAll(".toggle").forEach( function (element) {
       element.className = result[element.id] ? "toggle toggle-on" : "toggle toggle-off"
       element.onclick = handleClick;
