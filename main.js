@@ -1,132 +1,36 @@
-function showDistractions() {
-  document.body.classList.remove("yf-hide");
-}
-
-function hideDistractions() {
-  document.body.classList.add("yf-hide");
-}
-
-function updateAutoplay() {
-  chrome.storage.sync.get(defaultSettings, function (result) {
-    if (result.hidePlayerAutoplay) {
-      disableAutoplay();
-    }
-  });
-}
-
-function disableAutoplay() {
-  const autoplayOnButton = document.querySelector(
-    "paper-toggle-button[aria-pressed='true']"
-  );
-  if (autoplayOnButton) {
-    autoplayOnButton.click();
-  }
-}
-
-function showElement(elementSelector, display) {
-  let selectedElement = document.querySelector(elementSelector);
-  if (selectedElement) {
-    selectedElement.style.visibility = "visible";
-  }
-}
-// hideElement("body");
 const defaultSettings = {
+  hideMode: true,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
-  hidePlayerEndwall: true,
   hidePlayerRelated: true,
+  hidePlayerEndwall: true,
   hidePlayerComments: false,
-  hidePlayerAutoplay: true,
-  isShowing: true,
 };
+/**
+ * Hides/shows certain elements on the page by adding/removing classes to the page. Refer to hide.css to see what added
+ * classes hide what elements.
+ * @param    {String} change        Class to add/remove to page
+ * @param    {Boolean} newValue     True to add class, false to remove
+ */
+function alterVisibility(change, newValue) {
+  newValue
+    ? document.body.classList.add(change)
+    : document.body.classList.remove(change);
+}
+
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
-    if (result.isShowing === false) {
-      hideDistractions();
-      updateAutoplay();
-    }
-    updateHomepageSidebarClass(result.hideHomepageSidebar);
-    updateHomepageVideosClass(result.hideHomepageVideos);
-    updateVideoplayerRelatedClass(result.hidePlayerRelated);
-    updateVideoplayerEndwallClass(result.hidePlayerEndwall);
-    updateVideoplayerCommentsClass(result.hidePlayerComments);
-    updateVideoplayerAutoplayClass(result.hidePlayerAutoplay);
-    // Special case because it was popping up on refresh
-    showElement("#guide-content");
-    showElement("body", "block");
+    Object.entries(result).forEach((el) => {
+      alterVisibility(el[0], el[1]);
+    });
+    // Special case because hidden content was flashing on refresh (hide.css is hiding these initially)
+    document.querySelector("body").style.visibility = "visible";
+    document.querySelector("#guide-content").style.visibility = "visible";
   });
 };
 
 chrome.storage.onChanged.addListener(function (changes, areaName) {
-  if (changes.isShowing !== undefined) {
-    if (changes.isShowing.newValue === false) {
-      hideDistractions();
-      updateAutoplay();
-    } else {
-      showDistractions();
-    }
-  }
+  const change = Object.keys(changes)[0];
+  const newValue = changes[change].newValue;
+  alterVisibility(change, newValue);
 });
-chrome.storage.onChanged.addListener(function (changes, areaName) {
-  if (changes.hideHomepageSidebar) {
-    updateHomepageSidebarClass(changes.hideHomepageSidebar.newValue);
-  }
-  if (changes.hideHomepageVideos) {
-    updateHomepageVideosClass(changes.hideHomepageVideos.newValue);
-  }
-  if (changes.hidePlayerRelated) {
-    updateVideoplayerRelatedClass(changes.hidePlayerRelated.newValue);
-  }
-  if (changes.hidePlayerEndwall) {
-    updateVideoplayerEndwallClass(changes.hidePlayerEndwall.newValue);
-  }
-  if (changes.hidePlayerComments) {
-    updateVideoplayerCommentsClass(changes.hidePlayerComments.newValue);
-  }
-  if (changes.hidePlayerAutoplay) {
-    updateVideoplayerAutoplayClass(changes.hidePlayerAutoplay.newValue);
-    updateAutoplay();
-  }
-});
-function updateHomepageSidebarClass(val) {
-  if (val) {
-    document.body.classList.add("homepage-sidebar-hide");
-  } else {
-    document.body.classList.remove("homepage-sidebar-hide");
-  }
-}
-function updateHomepageVideosClass(val) {
-  if (val) {
-    document.body.classList.add("homepage-videos-hide");
-  } else {
-    document.body.classList.remove("homepage-videos-hide");
-  }
-}
-function updateVideoplayerRelatedClass(val) {
-  if (val) {
-    document.body.classList.add("videoplayer-related-hide");
-  } else {
-    document.body.classList.remove("videoplayer-related-hide");
-  }
-}
-function updateVideoplayerEndwallClass(val) {
-  if (val) {
-    document.body.classList.add("videoplayer-endwall-hide");
-  } else {
-    document.body.classList.remove("videoplayer-endwall-hide");
-  }
-}
-function updateVideoplayerCommentsClass(val) {
-  if (val) {
-    document.body.classList.add("videoplayer-comments-hide");
-  } else {
-    document.body.classList.remove("videoplayer-comments-hide");
-  }
-}
-function updateVideoplayerAutoplayClass(val) {
-  if (val) {
-    document.body.classList.add("videoplayer-autoplay-hide");
-  } else {
-    document.body.classList.remove("videoplayer-autoplay-hide");
-  }
-}

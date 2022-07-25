@@ -1,44 +1,37 @@
-let isShowing = true;
+const defaultSettings = {
+  hideMode: true,
+  hideHomepageVideos: true,
+  hideHomepageSidebar: true,
+  hidePlayerRelated: true,
+  hidePlayerEndwall: true,
+  hidePlayerComments: false,
+};
 
-let alterDistractionsButton = document.getElementById("alterDistractions");
-
-function doToggle(isShowing) {
-  if (isShowing) {
-    alterDistractionsButton.className = "toggle toggle-off";
-  } else {
-    alterDistractionsButton.className = "toggle toggle-on";
-  }
+function setPopupState(hideMode){
+  document.getElementById("titleWrap").title = hideMode ? "" : "Extension disabled";
+  document.querySelector("ol").style.pointerEvents = hideMode ? "auto" : "none";
+  document.querySelector("ol").style.opacity = hideMode ? "1.0" : "0.4";
 }
 
-function handleClick(event) {
-  chrome.storage.sync.get({ isShowing: true }, function (result) {
-    let isShowing = result.isShowing;
-    isShowing = !isShowing;
-    chrome.storage.sync.set({ isShowing: isShowing });
-    doToggle(isShowing);
+function handleClick() {
+  const id = this.id;
+  let button = this;
+  chrome.storage.sync.get(defaultSettings, function (result) {
+    const newValue = !result[id];
+    chrome.storage.sync.set({[id]: newValue});
+    button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
+    if(id === "hideMode") setPopupState(newValue);
   });
 }
-
-alterDistractionsButton.onclick = handleClick;
-
-// Working on options page
-let openOptionsPageButton = document.getElementById("openOptionsPage");
-
-function openOptionPageOnClick(event) {
-  chrome.tabs.create({
-    url: "options.html",
-  });
-}
-openOptionsPageButton.onclick = openOptionPageOnClick;
 
 window.onload = function () {
-  chrome.storage.sync.get({ isShowing: true, adShowing: true }, function (
+  chrome.storage.sync.get(defaultSettings, function (
     result
   ) {
-    if (result.isShowing) {
-      alterDistractionsButton.className = "toggle toggle-off";
-    } else {
-      alterDistractionsButton.className = "toggle toggle-on";
-    }
+    document.querySelectorAll(".toggle").forEach( function (element) {
+      element.className = result[element.id] ? "toggle toggle-on" : "toggle toggle-off"
+      element.onclick = handleClick;
+    })
+    setPopupState(result.hideMode)
   });
 };

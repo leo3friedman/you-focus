@@ -6,12 +6,12 @@ let hidePlayerComments = false;
 let hidePlayerLiveChat = false;
 
 const defaultSettings = {
+  hideMode: false,
   hideHomepageVideos: true,
   hideHomepageSidebar: true,
-  hidePlayerEndwall: true,
   hidePlayerRelated: true,
+  hidePlayerEndwall: true,
   hidePlayerComments: false,
-  hidePlayerAutoplay: true,
 };
 
 function toggleSettings(optionKey) {
@@ -79,13 +79,6 @@ function updateVideoplayerEndwallImage(hide) {
     videoplayerEndwallImage.style.visibility = "visible";
   }
 }
-function updateVideoplayerAutoplayImage(hide) {
-  if (hide) {
-    videoplayerAutoplayImage.style.visibility = "hidden";
-  } else {
-    videoplayerAutoplayImage.style.visibility = "visible";
-  }
-}
 
 function updateVideoplayerRelatedImage(hide) {
   if (hide) {
@@ -106,20 +99,17 @@ let homepageSidebarImage = document.getElementById("homepageSidebar");
 let videoplayerCommentsImage = document.getElementById("videoplayerComments");
 let videoplayerRelatedImage = document.getElementById("videoplayerRelated");
 let videoplayerEndwallImage = document.getElementById("videoplayerEndwall");
-let videoplayerAutoplayImage = document.getElementById("videoplayerAutoplay");
 let homepageVideosButton = document.getElementById("homepageVideosCheckbox");
 let homepageSidebarButton = document.getElementById("homepageSidebarCheckbox");
 let playerEndwallButton = document.getElementById("playerEndwallCheckbox");
 let playerCommentsButton = document.getElementById("playerCommentsCheckbox");
 let playerRelatedButton = document.getElementById("playerRelatedCheckbox");
-let playerAutoplayButton = document.getElementById("playerAutoplayCheckbox");
 
 homepageVideosButton.onclick = () => toggleSettings("hideHomepageVideos");
 homepageSidebarButton.onclick = () => toggleSettings("hideHomepageSidebar");
 playerEndwallButton.onclick = () => toggleSettings("hidePlayerEndwall");
 playerCommentsButton.onclick = () => toggleSettings("hidePlayerComments");
 playerRelatedButton.onclick = () => toggleSettings("hidePlayerRelated");
-playerAutoplayButton.onclick = () => toggleSettings("hidePlayerAutoplay");
 editVideoplayerButton.onclick = () => editVideoplayer();
 editHomepageButton.onclick = () => editHomepage();
 helpButton.onclick = () => help();
@@ -134,13 +124,11 @@ window.onload = function () {
     playerEndwallButton.checked = result.hidePlayerEndwall;
     playerCommentsButton.checked = result.hidePlayerComments;
     playerRelatedButton.checked = result.hidePlayerRelated;
-    playerAutoplayButton.checked = result.hidePlayerAutoplay;
     updateHomepageSidebarImage(result.hideHomepageSidebar);
     updateHomepageVideosImage(result.hideHomepageVideos);
     updateVideoplayerRelatedImage(result.hidePlayerRelated);
     updateVideoplayerEndwallImage(result.hidePlayerEndwall);
     updateVideoplayerCommentsImage(result.hidePlayerComments);
-    updateVideoplayerAutoplayImage(result.hidePlayerAutoplay);
     editHomepage();
   });
 };
@@ -165,10 +153,6 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
   if (changes.hidePlayerComments) {
     updateVideoplayerCommentsImage(changes.hidePlayerComments.newValue);
     playerCommentsButton.checked = changes.hidePlayerComments.newValue;
-  }
-  if (changes.hidePlayerAutoplay) {
-    updateVideoplayerAutoplayImage(changes.hidePlayerAutoplay.newValue);
-    playerAutoplayButton.checked = changes.hidePlayerAutoplay.newValue;
   }
 });
 
@@ -229,18 +213,6 @@ document
   .querySelector(".hide-homepage-sidebar")
   .addEventListener("mouseleave", () => {
     document.querySelector(".homepage-sidebar-highlight").style.display =
-      "none";
-  });
-document
-  .querySelector(".hide-videoplayer-autoplay")
-  .addEventListener("mouseenter", () => {
-    document.querySelector(".videoplayer-autoplay-highlight").style.display =
-      "block";
-  });
-document
-  .querySelector(".hide-videoplayer-autoplay")
-  .addEventListener("mouseleave", () => {
-    document.querySelector(".videoplayer-autoplay-highlight").style.display =
       "none";
   });
 function resetSettings() {

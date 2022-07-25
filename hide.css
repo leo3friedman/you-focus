@@ -1,42 +1,40 @@
 /* Hiding elements on page load so no flash */
-body {
-  visibility: hidden;
-}
+body,
 #guide-content {
   visibility: hidden;
 }
 
-/* Hide everything but settings */
-body.yf-hide.homepage-sidebar-hide
+/* hide homepage video feed */
+body.hideMode.hideHomepageVideos ytd-rich-grid-renderer,
+/* hide Explore and Shorts in first section (Home...Subscriptions) of homepage sidebar */
+body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:first-child
   #items
-  > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(3)),
-body.yf-hide.homepage-sidebar-hide
-  ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
+  > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(4)),
+/* hide EXPLORE and MORE FROM YOUTUBE sections of homepage sidebar*/
+body.hideMode.hideHomepageSidebar
+  ytd-guide-section-renderer:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(5)),
+/* hide Explore and Shorts on mini homepage sidebar */
+body.hideMode.hideHomepageSidebar ytd-mini-guide-entry-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
+/* hide related sidebar on video player */
+body.hideMode.hidePlayerRelated #related,
+/* hide endwall on video player*/
+body.hideMode.hidePlayerEndwall .videowall-endscreen,
+/* hide comments on video player */
+body.hideMode.hidePlayerComments .ytd-comments {
   display: none;
 }
 
-body.yf-hide.videoplayer-related-hide
-  .ytd-watch-next-secondary-results-renderer:not(:first-child),
-body.yf-hide.videoplayer-autoplay-hide ytd-compact-autoplay-renderer,
-body.yf-hide.videoplayer-comments-hide .ytd-comments,
-body.yf-hide.homepage-videos-hide ytd-rich-grid-renderer,
-body.yf-hide.homepage-videos-hide ytd-video-masthead-ad-v3-renderer,
-body.yf-hide.homepage-sidebar-hide ytd-mini-guide-renderer,
-body.yf-hide.videoplayer-endwall-hide .videowall-endscreen {
-  display: none;
-}
-
-/* Hiding some popup ads by default*/
-body.yf-hide #companion,
-body.yf-hide .ytp-ad-text-overlay,
-body.yf-hide .ytp-ad-overlay-image,
-body.yf-hide .ytp-ad-overlay-container,
-body.yf-hide ytd-promoted-video-renderer,
-body.yf-hide ytd-video-masthead-ad-v3-renderer,
-body.yf-hide ytd-action-companion-ad-renderer,
-body.yf-hide .ytd-player-legacy-desktop-watch-ads-renderer,
-body.yf-hide ytd-promoted-sparkles-text-search-renderer,
-body.yf-hide ytd-promoted-sparkles-web-renderer {
+/* Hiding some ads when extension is enabled*/
+body.hideMode #companion,
+body.hideMode .ytp-ad-text-overlay,
+body.hideMode .ytp-ad-overlay-image,
+body.hideMode .ytp-ad-overlay-container,
+body.hideMode ytd-promoted-video-renderer,
+body.hideMode ytd-video-masthead-ad-v3-renderer,
+body.hideMode ytd-action-companion-ad-renderer,
+body.hideMode .ytd-player-legacy-desktop-watch-ads-renderer,
+body.hideMode ytd-promoted-sparkles-text-search-renderer,
+body.hideMode ytd-promoted-sparkles-web-renderer {
   display: none;
 }

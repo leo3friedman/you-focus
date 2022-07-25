@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="105" height="27" viewBox="0 0 105 27">
+  <g id="Logo" transform="translate(-432 -733)">
+    <g id="_16" data-name="16" transform="translate(-288 488.239)">
+      <path id="Path_10" data-name="Path 10" d="M0-.239H18.308V4.174L13.775,20.027v3.734H0Z" transform="translate(720 248)" fill="red"/>
+      <path id="Path_11" data-name="Path 11" d="M15.713-154.213v-6.621h4.626v-3.133H15.713v-2.977h5.66v-3.222H12.226l-.216.651-.971.337v14.966Z" transform="translate(722.628 422.265)"/>
+      <path id="Path_12" data-name="Path 12" d="M4.84-154.213v-6.177l4.6-9.776H4.993l-2.3,5.666H2.642L.469-170.166h-4.5L.52-160.39v6.177Z" transform="translate(728.879 422.265)" fill="#fff"/>
+    </g>
+    <text id="YouFocus" transform="translate(464 756)" font-size="22" font-family="TradeGothicNextLTPro-Cn, Trade Gothic Next LT Pro"><tspan x="0" y="0">YouFocus</tspan></text>
+  </g>
+</svg>
