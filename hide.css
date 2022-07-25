@@ -1,31 +1,31 @@
 /* Hiding elements on page load so no flash */
-body {
-  visibility: hidden;
-}
+body,
 #guide-content {
   visibility: hidden;
 }
 
-/* Hide everything but settings */
+/* hide homepage video feed */
+body.hideMode.hideHomepageVideos ytd-rich-grid-renderer,
+/* hide Explore and Shorts in first section (Home...Subscriptions) of homepage sidebar */
 body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:first-child
   #items
   > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(4)),
+/* hide EXPLORE and MORE FROM YOUTUBE sections of homepage sidebar*/
 body.hideMode.hideHomepageSidebar
-  ytd-guide-section-renderer:not(:nth-child(4)):not(:nth-child(1)):not(:nth-child(2)) {
-  display: none;
-}
-
+  ytd-guide-section-renderer:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(5)),
+/* hide Explore and Shorts on mini homepage sidebar */
+body.hideMode.hideHomepageSidebar ytd-mini-guide-entry-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
+/* hide related sidebar on video player */
 body.hideMode.hidePlayerRelated #related,
-body.hideMode.hidePlayerComments .ytd-comments,
-body.hideMode.hideHomepageVideos ytd-rich-grid-renderer,
-body.hideMode.hideHomepageVideos ytd-video-masthead-ad-v3-renderer,
-body.hideMode.hideHomepageSidebar .ytd-mini-guide-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
-body.hideMode.hidePlayerEndwall .videowall-endscreen {
+/* hide endwall on video player*/
+body.hideMode.hidePlayerEndwall .videowall-endscreen,
+/* hide comments on video player */
+body.hideMode.hidePlayerComments .ytd-comments {
   display: none;
 }
 
-/* Hiding some popup ads by default*/
+/* Hiding some ads when extension is enabled*/
 body.hideMode #companion,
 body.hideMode .ytp-ad-text-overlay,
 body.hideMode .ytp-ad-overlay-image,

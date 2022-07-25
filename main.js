@@ -13,23 +13,24 @@ const defaultSettings = {
  * @param    {Boolean} newValue     True to add class, false to remove
  */
 function alterVisibility(change, newValue) {
-  newValue ? document.body.classList.add(change) : document.body.classList.remove(change);
+  newValue
+    ? document.body.classList.add(change)
+    : document.body.classList.remove(change);
 }
 
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
-    Object.entries(result).forEach((el)=>{
-      alterVisibility(el[0],el[1])
-    })
-    // Special case because it was popping up on refresh (hide.css is hiding these initially)
-    document.querySelector("body").style.visibility = "visible"
-    document.querySelector("#guide-content").style.visibility = "visible"
+    Object.entries(result).forEach((el) => {
+      alterVisibility(el[0], el[1]);
+    });
+    // Special case because hidden content was flashing on refresh (hide.css is hiding these initially)
+    document.querySelector("body").style.visibility = "visible";
+    document.querySelector("#guide-content").style.visibility = "visible";
   });
 };
 
 chrome.storage.onChanged.addListener(function (changes, areaName) {
-  const change = Object.keys(changes)[0]
-  const newValue = changes[change].newValue
-  alterVisibility(change, newValue)
+  const change = Object.keys(changes)[0];
+  const newValue = changes[change].newValue;
+  alterVisibility(change, newValue);
 });
-
