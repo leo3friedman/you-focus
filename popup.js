@@ -5,12 +5,19 @@ const defaultSettings = {
   hidePlayerRelated: true,
   hidePlayerEndwall: true,
   hidePlayerComments: false,
+  enableScheduledRun: false,
+  scheduleStartTime: "09:00",
+  scheduleEndTime: "17:00",
 };
 
-function setPopupState(hideMode){
-  document.getElementById("titleWrap").title = hideMode ? "" : "Extension disabled";
-  document.querySelector("ol").style.pointerEvents = hideMode ? "auto" : "none";
-  document.querySelector("ol").style.opacity = hideMode ? "1.0" : "0.4";
+function setPopupState(hideMode) {
+  document.getElementById("titleWrap").title = hideMode
+    ? ""
+    : "Extension disabled";
+  document.querySelectorAll(".popup-body-section").forEach((el) => {
+    el.style.pointerEvents = hideMode ? "auto" : "none";
+    el.style.opacity = hideMode ? "1.0" : "0.4";
+  });
 }
 
 function handleClick() {
@@ -18,20 +25,20 @@ function handleClick() {
   let button = this;
   chrome.storage.sync.get(defaultSettings, function (result) {
     const newValue = !result[id];
-    chrome.storage.sync.set({[id]: newValue});
+    chrome.storage.sync.set({ [id]: newValue });
     button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
-    if(id === "hideMode") setPopupState(newValue);
+    if (id === "hideMode") setPopupState(newValue);
   });
 }
 
 window.onload = function () {
-  chrome.storage.sync.get(defaultSettings, function (
-    result
-  ) {
-    document.querySelectorAll(".toggle").forEach( function (element) {
-      element.className = result[element.id] ? "toggle toggle-on" : "toggle toggle-off"
+  chrome.storage.sync.get(defaultSettings, function (result) {
+    document.querySelectorAll(".toggle").forEach(function (element) {
+      element.className = result[element.id]
+        ? "toggle toggle-on"
+        : "toggle toggle-off";
       element.onclick = handleClick;
-    })
-    setPopupState(result.hideMode)
+    });
+    setPopupState(result.hideMode);
   });
 };

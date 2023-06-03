@@ -2,60 +2,100 @@
 <html>
   <head>
     <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="toggle.css" />
   </head>
   <body>
-    <header>
-      <img src="images/yf-header.svg" />
-      <button class="toggle" id="hideMode">
-        <div class="toggle-circle"></div>
-      </button>
+    <header class="header">
+      <div class="header-content">
+        <img src="images/yf-header.svg" />
+        <button class="toggle" id="hideMode">
+          <div class="toggle-circle"></div>
+        </button>
+      </div>
+      <hr />
     </header>
     <div class="popup-body">
       <div id="titleWrap" title="Extension Disabled">
-        <ol>
-          <li>
-            <div class="informational-text">Hide Home Feed</div>
-            <button class="toggle" id="hideHomepageVideos">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Clean Up Sidebar</div>
-            <button class="toggle" id="hideHomepageSidebar">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Video Related</div>
-            <button class="toggle" id="hidePlayerRelated">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Video Endwall</div>
-            <button class="toggle" id="hidePlayerEndwall">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Comments</div>
-            <button class="toggle" id="hidePlayerComments">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-        </ol>
+        <div class="popup-body-section">
+          <h1 class="section-header">Homepage</h1>
+          <ol>
+            <li>
+              <div class="informational-text">Hide Home Feed</div>
+              <button class="toggle" id="hideHomepageVideos">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div class="informational-text">Clean Up Sidebar</div>
+              <button class="toggle" id="hideHomepageSidebar">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+          </ol>
+        </div>
+        <div class="popup-body-section">
+          <h1 class="section-header">Videoplayer</h1>
+          <ol>
+            <li>
+              <div class="informational-text">Hide Video Related</div>
+              <button class="toggle" id="hidePlayerRelated">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div class="informational-text">Hide Video Endwall</div>
+              <button class="toggle" id="hidePlayerEndwall">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div class="informational-text">Hide Comments</div>
+              <button class="toggle" id="hidePlayerComments">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+          </ol>
+        </div>
+        <div class="popup-body-section">
+          <h1 class="section-header">Schedule</h1>
+          <ol>
+            <li>
+              <div class="informational-text">Enable Scheduled Run</div>
+              <button class="toggle" id="enableScheduledRun">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <span>From</span>
+              <input
+                class="schedule-input"
+                type="time"
+                value="09:00"
+                step="60" />
+              <span>to</span>
+              <input
+                class="schedule-input"
+                type="time"
+                value="17:00"
+                step="60" />
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
-    <!--    <button id="contact">Request Feature</button>-->
-    <a href="mailto:scone_proofs_0a@icloud.com?subject=YouFocus Feature Request"
-      >Request Feature</a
-    >
-    <a
-      id="rate"
-      href="https://chrome.google.com/webstore/detail/youfocus-hide-youtube-dis/kbcdmkcnmpolhhhpeohepljeccihfngl/reviews"
-      target="_blank"
-      >Rate</a
-    >
+    <div class="contact">
+      <a
+        href="mailto:scone_proofs_0a@icloud.com?subject=YouFocus Feature Request"
+        >Request Feature</a
+      >
+      <a
+        id="rate"
+        href="https://chrome.google.com/webstore/detail/youfocus-hide-youtube-dis/kbcdmkcnmpolhhhpeohepljeccihfngl/reviews"
+        target="_blank"
+        >Rate</a
+      >
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
