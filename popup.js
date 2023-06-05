@@ -5,9 +5,9 @@ const defaultSettings = {
   hidePlayerRelated: true,
   hidePlayerEndwall: true,
   hidePlayerComments: false,
-  enableScheduledRun: false,
-  scheduleStartTime: "09:00",
-  scheduleEndTime: "17:00",
+  enableSchedule: false,
+  scheduleStart: "09:00",
+  scheduleEnd: "17:00",
 };
 
 function setPopupState(hideMode) {
@@ -28,7 +28,20 @@ function handleClick() {
     chrome.storage.sync.set({ [id]: newValue });
     button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
     if (id === "hideMode") setPopupState(newValue);
+    if (id === "enableSchedule") {
+      chrome.storage.sync.set({
+        awake:
+          (result.enableSchedule &&
+            result.scheduleStart <= Date.now() &&
+            Date.now() <= result.scheduleEnd) ||
+          !result.enableSchedule,
+      });
+    }
   });
+}
+
+function handleInputChange(input) {
+  chrome.storage.sync.set({ [input.target.id]: input.target.value });
 }
 
 window.onload = function () {
@@ -38,6 +51,11 @@ window.onload = function () {
         ? "toggle toggle-on"
         : "toggle toggle-off";
       element.onclick = handleClick;
+    });
+
+    document.querySelectorAll(".schedule-input").forEach(function (input) {
+      input.value = result[input.id];
+      input.addEventListener("change", handleInputChange);
     });
     setPopupState(result.hideMode);
   });

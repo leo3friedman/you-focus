@@ -5,36 +5,36 @@ body,
 }
 
 /* hide homepage video feed */
-body.hideMode.hideHomepageVideos ytd-rich-grid-renderer,
+body.hideMode.awake.hideHomepageVideos ytd-rich-grid-renderer,
 /* hide Explore and Shorts in first section (Home...Subscriptions) of homepage sidebar */
 body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:first-child
   #items
   > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(4)),
 /* hide EXPLORE and MORE FROM YOUTUBE sections of homepage sidebar*/
-body.hideMode.hideHomepageSidebar
+body.hideMode.awake.hideHomepageSidebar
   ytd-guide-section-renderer:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(5)),
 /* hide Explore and Shorts on mini homepage sidebar */
-body.hideMode.hideHomepageSidebar ytd-mini-guide-entry-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
+body.hideMode.awake.hideHomepageSidebar ytd-mini-guide-entry-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
 /* hide related sidebar on video player */
-body.hideMode.hidePlayerRelated #related,
+body.hideMode.awake.hidePlayerRelated #related,
 /* hide endwall on video player*/
-body.hideMode.hidePlayerEndwall .videowall-endscreen,
+body.hideMode.awake.hidePlayerEndwall .videowall-endscreen,
 /* hide comments on video player */
-body.hideMode.hidePlayerComments .ytd-comments {
+body.hideMode.awake.hidePlayerComments .ytd-comments {
   display: none;
 }
 
 /* Hiding some ads when extension is enabled*/
-body.hideMode #companion,
-body.hideMode .ytp-ad-text-overlay,
-body.hideMode .ytp-ad-overlay-image,
-body.hideMode .ytp-ad-overlay-container,
-body.hideMode ytd-promoted-video-renderer,
-body.hideMode ytd-video-masthead-ad-v3-renderer,
-body.hideMode ytd-action-companion-ad-renderer,
-body.hideMode .ytd-player-legacy-desktop-watch-ads-renderer,
-body.hideMode ytd-promoted-sparkles-text-search-renderer,
-body.hideMode ytd-promoted-sparkles-web-renderer {
+body.hideMode.awake #companion,
+body.hideMode.awake .ytp-ad-text-overlay,
+body.hideMode.awake .ytp-ad-overlay-image,
+body.hideMode.awake .ytp-ad-overlay-container,
+body.hideMode.awake ytd-promoted-video-renderer,
+body.hideMode.awake ytd-video-masthead-ad-v3-renderer,
+body.hideMode.awake ytd-action-companion-ad-renderer,
+body.hideMode.awake .ytd-player-legacy-desktop-watch-ads-renderer,
+body.hideMode.awake ytd-promoted-sparkles-text-search-renderer,
+body.hideMode.awake ytd-promoted-sparkles-web-renderer {
   display: none;
 }

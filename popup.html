@@ -61,7 +61,7 @@
           <ol>
             <li>
               <div class="informational-text">Enable Scheduled Run</div>
-              <button class="toggle" id="enableScheduledRun">
+              <button class="toggle" id="enableSchedule">
                 <div class="toggle-circle"></div>
               </button>
             </li>
@@ -69,12 +69,14 @@
               <span>From</span>
               <input
                 class="schedule-input"
+                id="scheduleStart"
                 type="time"
                 value="09:00"
                 step="60" />
               <span>to</span>
               <input
                 class="schedule-input"
+                id="scheduleEnd"
                 type="time"
                 value="17:00"
                 step="60" />
