@@ -29,13 +29,9 @@ function handleClick() {
     button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
     if (id === "hideMode") setPopupState(newValue);
     if (id === "enableSchedule") {
-      chrome.storage.sync.set({
-        awake:
-          (result.enableSchedule &&
-            result.scheduleStart <= Date.now() &&
-            Date.now() <= result.scheduleEnd) ||
-          !result.enableSchedule,
-      });
+      document.getElementById("setScheduleWrapper").style.display = newValue
+        ? "block"
+        : "none";
     }
   });
 }
@@ -69,6 +65,8 @@ window.onload = function () {
         : "toggle toggle-off";
       element.onclick = handleClick;
     });
+    document.getElementById("setScheduleWrapper").style.display =
+      result.enableSchedule ? "block" : "none";
 
     document.querySelectorAll(".schedule-input").forEach(function (input) {
       input.value = result[input.id];
