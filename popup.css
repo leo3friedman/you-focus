@@ -1,39 +1,47 @@
 body {
   margin: 0;
-  width: 16rem;
+  width: 320px;
 }
 
-.header {
-  margin-bottom: 1.5rem;
-}
-
-.header-content {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
 }
 
-hr {
+main {
+  padding: 1rem;
   margin: 0;
-  border-top: px solid black;
+  background-color: rgb(247, 247, 247);
+  border-top: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
 }
 
-.popup-body {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: 0;
-}
-
-.popup-body-section {
-  margin-bottom: 1.5rem;
+section {
+  padding: 0;
 }
 
 .section-header {
+  font-size: 12px;
   margin: 0;
+  padding: 0;
+  margin-bottom: 1em;
+  color: rgb(74, 74, 74);
+}
+
+.section-content {
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  border-color: rgb(230, 230, 230);
+  box-shadow: 0 2px 4px 0 hsla(0, 0%, 84%, 0.5);
+}
+
+.section-content-header {
+  margin-top: 0;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 14px;
 }
 
 .informational-text {
@@ -68,10 +76,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   padding: 0;
 }
 
-.contact {
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+footer {
+  padding: 1rem;
 }
 
 #rate {

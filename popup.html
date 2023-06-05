@@ -1,23 +1,22 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <link rel="stylesheet" href="popup.css" />
     <link rel="stylesheet" href="toggle.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="header-content">
-        <img src="images/yf-header.svg" />
-        <button class="toggle" id="hideMode">
-          <div class="toggle-circle"></div>
-        </button>
-      </div>
-      <hr />
+    <header>
+      <img src="images/yf-header.svg" />
+      <button class="toggle" id="hideMode">
+        <div class="toggle-circle"></div>
+      </button>
     </header>
-    <div class="popup-body">
-      <div id="titleWrap" title="Extension Disabled">
-        <div class="popup-body-section">
-          <h1 class="section-header">Homepage</h1>
+    <main>
+      <section>
+        <h2 class="section-header">HIDE DISTRACTIONS</h2>
+        <div class="section-content">
+          <h3 class="section-content-header">Homepage</h1>
           <ol>
             <li>
               <div class="informational-text">Hide Home Feed</div>
@@ -32,9 +31,8 @@
               </button>
             </li>
           </ol>
-        </div>
-        <div class="popup-body-section">
-          <h1 class="section-header">Videoplayer</h1>
+          <br/>
+          <h3 class="section-content-header">Videoplayer</h1>
           <ol>
             <li>
               <div class="informational-text">Hide Video Related</div>
@@ -56,8 +54,12 @@
             </li>
           </ol>
         </div>
-        <div class="popup-body-section">
-          <h1 class="section-header">Schedule</h1>
+      </section>
+      </section>
+      <br />
+      <section>
+        <h2 class="section-header">RUN ON SCHEDULE</h2>
+        <div class="section-content">
           <ol>
             <li>
               <div class="informational-text">Enable Scheduled Run</div>
@@ -65,7 +67,7 @@
                 <div class="toggle-circle"></div>
               </button>
             </li>
-            <div id="setScheduleWrapper">
+            <div id="scheduleInputs">
               <li>
                 <span>From</span>
                 <input
@@ -85,9 +87,9 @@
             </div>
           </ol>
         </div>
-      </div>
-    </div>
-    <div class="contact">
+      </section>
+    </main>
+    <footer>
       <a
         href="mailto:scone_proofs_0a@icloud.com?subject=YouFocus Feature Request"
         >Request Feature</a
@@ -98,7 +100,7 @@
         target="_blank"
         >Rate</a
       >
-    </div>
+    </footer>
 
     <script src="popup.js"></script>
   </body>

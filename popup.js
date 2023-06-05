@@ -11,13 +11,10 @@ const defaultSettings = {
 };
 
 function setPopupState(hideMode) {
-  document.getElementById("titleWrap").title = hideMode
-    ? ""
-    : "Extension disabled";
-  document.querySelectorAll(".popup-body-section").forEach((el) => {
-    el.style.pointerEvents = hideMode ? "auto" : "none";
-    el.style.opacity = hideMode ? "1.0" : "0.4";
-  });
+  document.querySelector("main").style.opacity = hideMode ? "1.0" : "0.4";
+  document.querySelector("main").style.pointerEvents = hideMode
+    ? "auto"
+    : "none";
 }
 
 function handleClick() {
@@ -29,7 +26,7 @@ function handleClick() {
     button.className = newValue ? "toggle toggle-on" : "toggle toggle-off";
     if (id === "hideMode") setPopupState(newValue);
     if (id === "enableSchedule") {
-      document.getElementById("setScheduleWrapper").style.display = newValue
+      document.getElementById("scheduleInputs").style.display = newValue
         ? "block"
         : "none";
     }
@@ -65,7 +62,7 @@ window.onload = function () {
         : "toggle toggle-off";
       element.onclick = handleClick;
     });
-    document.getElementById("setScheduleWrapper").style.display =
+    document.getElementById("scheduleInputs").style.display =
       result.enableSchedule ? "block" : "none";
 
     document.querySelectorAll(".schedule-input").forEach(function (input) {
