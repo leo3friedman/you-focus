@@ -22,17 +22,37 @@ function alterVisibility(change, newValue) {
     : document.body.classList.remove(change);
 }
 
+function inRange(start, end) {
+  const startHour = Number(start.split(":")[0]);
+  const startMin = Number(start.split(":")[1]);
+  const endHour = Number(end.split(":")[0]);
+  const endMin = Number(end.split(":")[1]);
+  const startDate = new Date();
+  const endDate = new Date();
+  startDate.setHours(startHour, startMin, 0);
+  endDate.setHours(endHour, endMin, 59);
+  return startDate <= Date.now() && endDate >= Date.now();
+}
+
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
     Object.entries(result).forEach((el) => {
       key = el[0];
       value = el[1];
       if (
-        key !== "enableSchedule" &&
-        key !== "scheduleStart" &&
-        key !== "scheduleEnd"
-      )
+        key === "enableSchedule" ||
+        key === "scheduleStart" ||
+        key === "scheduleEnd"
+      ) {
+        chrome.storage.sync.set({
+          awake:
+            (result.enableSchedule &&
+              inRange(result.scheduleStart, result.scheduleEnd)) ||
+            !result.enableSchedule,
+        });
+      } else {
         alterVisibility(key, value);
+      }
     });
     // Special case because hidden content was flashing on refresh (hide.css is hiding these initially)
     document.querySelector("body").style.visibility = "visible";
@@ -53,19 +73,6 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
       });
     });
   } else {
-    console.log("change vis: " + change);
     alterVisibility(change, newValue);
-  }
-
-  function inRange(start, end) {
-    const startHour = Number(start.split(":")[0]);
-    const startMin = Number(start.split(":")[1]);
-    const endHour = Number(end.split(":")[0]);
-    const endMin = Number(end.split(":")[1]);
-    const startDate = new Date();
-    const endDate = new Date();
-    startDate.setHours(startHour, startMin, 0);
-    endDate.setHours(endHour, endMin, 59);
-    return startDate <= Date.now() && endDate >= Date.now();
   }
 });
