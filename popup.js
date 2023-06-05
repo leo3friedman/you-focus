@@ -41,6 +41,23 @@ function handleClick() {
 }
 
 function handleInputChange(input) {
+  startInput = document.getElementById("scheduleStart");
+  endInput = document.getElementById("scheduleEnd");
+  if (input.target.id === "scheduleStart") {
+    endInput.value =
+      input.target.value >= endInput.value
+        ? input.target.value
+        : endInput.value;
+  }
+  if (input.target.id === "scheduleEnd") {
+    startInput.value =
+      startInput.value >= input.target.value
+        ? input.target.value
+        : startInput.value;
+  }
+
+  startInput.value =
+    endInput.value <= startInput.value ? endInput.value : startInput.value;
   chrome.storage.sync.set({ [input.target.id]: input.target.value });
 }
 
