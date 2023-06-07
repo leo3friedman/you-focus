@@ -5,6 +5,7 @@ const defaultSettings = {
   hidePlayerRelated: true,
   hidePlayerEndwall: true,
   hidePlayerComments: false,
+  awake: true,
   enableSchedule: false,
   scheduleStart: "09:00",
   scheduleEnd: "17:00",
@@ -48,27 +49,33 @@ function handleInputChange(input) {
         ? input.target.value
         : startInput.value;
   }
-
-  startInput.value =
-    endInput.value <= startInput.value ? endInput.value : startInput.value;
-  chrome.storage.sync.set({ [input.target.id]: input.target.value });
 }
 
 window.onload = function () {
   chrome.storage.sync.get(defaultSettings, function (result) {
+    document.getElementById("scheduleInputs").style.display =
+      result.enableSchedule ? "block" : "none";
     document.querySelectorAll(".toggle").forEach(function (element) {
       element.className = result[element.id]
         ? "toggle toggle-on"
         : "toggle toggle-off";
       element.onclick = handleClick;
     });
-    document.getElementById("scheduleInputs").style.display =
-      result.enableSchedule ? "block" : "none";
-
     document.querySelectorAll(".schedule-input").forEach(function (input) {
       input.value = result[input.id];
       input.addEventListener("change", handleInputChange);
     });
+    document.getElementById("setSchedule").onclick = saveScheduleInputs;
+
     setPopupState(result.hideMode);
   });
 };
+
+function saveScheduleInputs() {
+  startInput = document.getElementById("scheduleStart");
+  endInput = document.getElementById("scheduleEnd");
+  chrome.storage.sync.set({
+    scheduleStart: startInput.value,
+    scheduleEnd: endInput.value,
+  });
+}

@@ -44,13 +44,6 @@ section {
   font-size: 14px;
 }
 
-.informational-text {
-  white-space: nowrap;
-  display: inline-block;
-  line-height: 20px;
-  vertical-align: top;
-}
-
 ol {
   list-style: none;
   margin: 0;
@@ -59,9 +52,9 @@ ol {
 
 li {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   margin-bottom: 8px;
   font-size: 14px;
 }

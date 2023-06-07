@@ -10,17 +10,19 @@ const defaultSettings = {
   scheduleStart: "09:00",
   scheduleEnd: "17:00",
 };
-/**
- * Hides/shows certain elements on the page by adding/removing classes to the page. Refer to hide.css to see what added
- * classes hide what elements.
- * @param    {String} change        Class to add/remove to page
- * @param    {Boolean} newValue     True to add class, false to remove
- */
-function alterVisibility(change, newValue) {
-  newValue
-    ? document.body.classList.add(change)
-    : document.body.classList.remove(change);
-}
+
+window.onload = function () {
+  setAwake();
+  setVisibilities();
+};
+
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.enableSchedule || changes.scheduleStart || changes.scheduleEnd) {
+    setAwake();
+  } else {
+    setVisibilities();
+  }
+});
 
 function inRange(start, end) {
   const startHour = Number(start.split(":")[0]);
@@ -34,45 +36,41 @@ function inRange(start, end) {
   return startDate <= Date.now() && endDate >= Date.now();
 }
 
-window.onload = function () {
+function isAwake(scheduleStart, scheduleEnd, enableSchedule) {
+  return (
+    (enableSchedule && inRange(scheduleStart, scheduleEnd)) || !enableSchedule
+  );
+}
+
+function setAwake() {
   chrome.storage.sync.get(defaultSettings, function (result) {
-    Object.entries(result).forEach((el) => {
-      key = el[0];
-      value = el[1];
-      if (
-        key === "enableSchedule" ||
-        key === "scheduleStart" ||
-        key === "scheduleEnd"
-      ) {
-        chrome.storage.sync.set({
-          awake:
-            (result.enableSchedule &&
-              inRange(result.scheduleStart, result.scheduleEnd)) ||
-            !result.enableSchedule,
-        });
-      } else {
-        alterVisibility(key, value);
-      }
+    chrome.storage.sync.set({
+      awake: isAwake(
+        result.scheduleStart,
+        result.scheduleEnd,
+        result.enableSchedule
+      ),
+    });
+  });
+}
+
+function setVisibilities() {
+  chrome.storage.sync.get(defaultSettings, function (result) {
+    [
+      "hideMode",
+      "hideHomepageVideos",
+      "hideHomepageSidebar",
+      "hidePlayerRelated",
+      "hidePlayerEndwall",
+      "hidePlayerComments",
+      "awake",
+    ].forEach((key) => {
+      result[key]
+        ? document.body.classList.add(key)
+        : document.body.classList.remove(key);
     });
     // Special case because hidden content was flashing on refresh (hide.css is hiding these initially)
     document.querySelector("body").style.visibility = "visible";
     document.querySelector("#guide-content").style.visibility = "visible";
   });
-};
-
-chrome.storage.onChanged.addListener(function (changes, areaName) {
-  const change = Object.keys(changes)[0];
-  const newValue = changes[change].newValue;
-  if (changes.enableSchedule || changes.scheduleStart || changes.scheduleEnd) {
-    chrome.storage.sync.get(defaultSettings, function (result) {
-      chrome.storage.sync.set({
-        awake:
-          (result.enableSchedule &&
-            inRange(result.scheduleStart, result.scheduleEnd)) ||
-          !result.enableSchedule,
-      });
-    });
-  } else {
-    alterVisibility(change, newValue);
-  }
-});
+}
