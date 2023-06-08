@@ -12,8 +12,15 @@ const defaultSettings = {
 };
 
 window.onload = function () {
+  localStorage.setItem("lastEvent", Date.now());
   setAwake();
   setVisibilities();
+  document.body.addEventListener("mousemove", () => {
+    activeEvent();
+  });
+  document.body.addEventListener("click", () => {
+    activeEvent();
+  });
 };
 
 chrome.storage.onChanged.addListener((changes) => {
@@ -23,6 +30,14 @@ chrome.storage.onChanged.addListener((changes) => {
     setVisibilities();
   }
 });
+
+function activeEvent() {
+  if (Date.now() - localStorage.getItem("lastEvent") > 5000) {
+    console.log("active event");
+    localStorage.setItem("lastEvent", Date.now());
+    setAwake();
+  }
+}
 
 function inRange(start, end) {
   const startHour = Number(start.split(":")[0]);
@@ -44,13 +59,18 @@ function isAwake(scheduleStart, scheduleEnd, enableSchedule) {
 
 function setAwake() {
   chrome.storage.sync.get(defaultSettings, function (result) {
-    chrome.storage.sync.set({
-      awake: isAwake(
-        result.scheduleStart,
-        result.scheduleEnd,
-        result.enableSchedule
-      ),
-    });
+    if (
+      result.awake !==
+      isAwake(result.scheduleStart, result.scheduleEnd, result.enableSchedule)
+    ) {
+      chrome.storage.sync.set({
+        awake: isAwake(
+          result.scheduleStart,
+          result.scheduleEnd,
+          result.enableSchedule
+        ),
+      });
+    }
   });
 }
 
