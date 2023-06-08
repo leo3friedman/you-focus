@@ -49,6 +49,7 @@ function handleInputChange(input) {
         ? input.target.value
         : startInput.value;
   }
+  document.getElementById("setSchedule").style.display = "block";
 }
 
 window.onload = function () {
@@ -78,4 +79,5 @@ function saveScheduleInputs() {
     scheduleStart: startInput.value,
     scheduleEnd: endInput.value,
   });
+  this.style.display = "none";
 }

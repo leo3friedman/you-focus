@@ -69,6 +69,19 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   padding: 0;
 }
 
+#setSchedule {
+  display: none;
+  padding: 0.375rem;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+#setSchedule:hover {
+  cursor: pointer;
+}
+
 footer {
   padding: 1rem;
 }
