@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="toggle.css" />
   </head>
   <body>
     <header>
@@ -10,52 +12,99 @@
         <div class="toggle-circle"></div>
       </button>
     </header>
-    <div class="popup-body">
-      <div id="titleWrap" title="Extension Disabled">
-        <ol>
-          <li>
-            <div class="informational-text">Hide Home Feed</div>
-            <button class="toggle" id="hideHomepageVideos">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Clean Up Sidebar</div>
-            <button class="toggle" id="hideHomepageSidebar">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Video Related</div>
-            <button class="toggle" id="hidePlayerRelated">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Video Endwall</div>
-            <button class="toggle" id="hidePlayerEndwall">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-          <li>
-            <div class="informational-text">Hide Comments</div>
-            <button class="toggle" id="hidePlayerComments">
-              <div class="toggle-circle"></div>
-            </button>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <!--    <button id="contact">Request Feature</button>-->
-    <a href="mailto:scone_proofs_0a@icloud.com?subject=YouFocus Feature Request"
-      >Request Feature</a
-    >
-    <a
-      id="rate"
-      href="https://chrome.google.com/webstore/detail/youfocus-hide-youtube-dis/kbcdmkcnmpolhhhpeohepljeccihfngl/reviews"
-      target="_blank"
-      >Rate</a
-    >
+    <main>
+      <section>
+        <h2 class="section-header">HIDE DISTRACTIONS</h2>
+        <div class="section-content">
+          <h3 class="section-content-header">Homepage</h3>
+          <ol>
+            <li>
+              <div>Hide Home Feed</div>
+              <button class="toggle" id="hideHomepageVideos">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div>Clean Up Sidebar</div>
+              <button class="toggle" id="hideHomepageSidebar">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+          </ol>
+          <br />
+          <h3 class="section-content-header">Videoplayer</h3>
+          <ol>
+            <li>
+              <div>Hide Video Related</div>
+              <button class="toggle" id="hidePlayerRelated">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div>Hide Video Endwall</div>
+              <button class="toggle" id="hidePlayerEndwall">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <li>
+              <div>Hide Comments</div>
+              <button class="toggle" id="hidePlayerComments">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <br />
+      <section>
+        <h2 class="section-header">RUN ON SCHEDULE</h2>
+        <div class="section-content">
+          <ol>
+            <li>
+              <div>Enable Scheduled Run</div>
+              <button class="toggle" id="enableSchedule">
+                <div class="toggle-circle"></div>
+              </button>
+            </li>
+            <div id="scheduleInputs">
+              <li>
+                <span>From</span>
+                <input
+                  class="schedule-input"
+                  id="scheduleStart"
+                  type="time"
+                  value="09:00"
+                  step="60" />
+                <span>to</span>
+                <input
+                  class="schedule-input"
+                  id="scheduleEnd"
+                  type="time"
+                  value="17:00"
+                  step="60" />
+              </li>
+              <li>
+                <button class="scheduleBtn" id="setSchedule">
+                  Save Changes
+                </button>
+              </li>
+            </div>
+          </ol>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a
+        href="mailto:scone_proofs_0a@icloud.com?subject=YouFocus Feature Request"
+        >Request Feature</a
+      >
+      <a
+        id="rate"
+        href="https://chrome.google.com/webstore/detail/youfocus-hide-youtube-dis/kbcdmkcnmpolhhhpeohepljeccihfngl/reviews"
+        target="_blank"
+        >Rate</a
+      >
+    </footer>
     <script src="popup.js"></script>
   </body>
 </html>
