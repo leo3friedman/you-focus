@@ -5,7 +5,7 @@ body,
 }
 
 /* hide homepage video feed */
-body.hideMode.awake.hideHomepageVideos ytd-rich-grid-renderer,
+body.hideMode.awake.hideHomepageVideos ytd-two-column-browse-results-renderer[page-subtype="home"],
 /* hide Explore and Shorts in first section (Home...Subscriptions) of homepage sidebar */
 body.hideMode.hideHomepageSidebar
   ytd-guide-section-renderer:first-child
