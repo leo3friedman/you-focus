@@ -7,20 +7,49 @@ const defaultSettings = {
   hidePlayerComments: false,
   awake: true,
   enableSchedule: false,
-  scheduleStart: "09:00",
-  scheduleEnd: "17:00",
+  scheduleStart: '09:00',
+  scheduleEnd: '17:00',
 };
 
 window.onload = function () {
-  localStorage.setItem("lastEvent", Date.now());
+  localStorage.setItem('lastEvent', Date.now());
   setAwake();
   setVisibilities();
-  document.body.addEventListener("mousemove", () => {
+  document.body.addEventListener('mousemove', () => {
     activeEvent();
   });
-  document.body.addEventListener("click", () => {
+  document.body.addEventListener('click', () => {
     activeEvent();
   });
+
+  // ad handling
+  const player = document.body.querySelector('.html5-video-player');
+
+  player.classList.add('ad-showing'); // Included for testing (runs everytime)
+
+  if (player.classList.contains('ad-showing')) {
+    const adBlocker = document.createElement('div');
+    adBlocker.className = 'ad-blocker';
+
+    playerDims = player.getBoundingClientRect();
+
+    const blockerStyles = {
+      position: 'absolute',
+      backgroundColor: 'black',
+      zIndex: Number.MAX_SAFE_INTEGER,
+      width: `${playerDims.width}px`,
+      height: `${playerDims.height}px`,
+      top: `${playerDims.top}px`,
+      left: `${playerDims.left}px`,
+      opacity: '0.5',
+      pointerEvents: 'none',
+      borderRadius: '12px',
+    };
+
+    Object.assign(adBlocker.style, blockerStyles);
+
+    document.body.appendChild(adBlocker);
+  }
 };
 
 chrome.storage.onChanged.addListener((changes) => {
@@ -32,18 +61,18 @@ chrome.storage.onChanged.addListener((changes) => {
 });
 
 function activeEvent() {
-  if (Date.now() - localStorage.getItem("lastEvent") > 5000) {
-    console.log("active event");
-    localStorage.setItem("lastEvent", Date.now());
+  if (Date.now() - localStorage.getItem('lastEvent') > 5000) {
+    console.log('active event');
+    localStorage.setItem('lastEvent', Date.now());
     setAwake();
   }
 }
 
 function inRange(start, end) {
-  const startHour = Number(start.split(":")[0]);
-  const startMin = Number(start.split(":")[1]);
-  const endHour = Number(end.split(":")[0]);
-  const endMin = Number(end.split(":")[1]);
+  const startHour = Number(start.split(':')[0]);
+  const startMin = Number(start.split(':')[1]);
+  const endHour = Number(end.split(':')[0]);
+  const endMin = Number(end.split(':')[1]);
   const startDate = new Date();
   const endDate = new Date();
   startDate.setHours(startHour, startMin, 0);
@@ -77,20 +106,20 @@ function setAwake() {
 function setVisibilities() {
   chrome.storage.sync.get(defaultSettings, function (result) {
     [
-      "hideMode",
-      "hideHomepageVideos",
-      "hideHomepageSidebar",
-      "hidePlayerRelated",
-      "hidePlayerEndwall",
-      "hidePlayerComments",
-      "awake",
+      'hideMode',
+      'hideHomepageVideos',
+      'hideHomepageSidebar',
+      'hidePlayerRelated',
+      'hidePlayerEndwall',
+      'hidePlayerComments',
+      'awake',
     ].forEach((key) => {
       result[key]
         ? document.body.classList.add(key)
         : document.body.classList.remove(key);
     });
     // Special case because hidden content was flashing on refresh (hide.css is hiding these initially)
-    document.querySelector("body").style.visibility = "visible";
-    document.querySelector("#guide-content").style.visibility = "visible";
+    document.querySelector('body').style.visibility = 'visible';
+    document.querySelector('#guide-content').style.visibility = 'visible';
   });
 }
