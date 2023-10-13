@@ -11,6 +11,45 @@ const defaultSettings = {
   scheduleEnd: '17:00',
 };
 
+const muteVideo = () => {
+  const video = document.querySelector('video');
+  if (video) video.muted = true;
+};
+
+const unmuteVideo = () => {
+  const video = document.querySelector('video');
+  if (video) video.muted = false;
+};
+
+const displayBlocker = () => {
+  const adBlocker = document.createElement('div');
+  adBlocker.className = 'ad-blocker';
+
+  playerDims = player.getBoundingClientRect();
+
+  const blockerStyles = {
+    position: 'absolute',
+    backgroundColor: 'black',
+    zIndex: Number.MAX_SAFE_INTEGER,
+    width: `${playerDims.width}px`,
+    height: `${playerDims.height}px`,
+    top: `${playerDims.top}px`,
+    left: `${playerDims.left}px`,
+    opacity: '0.5',
+    pointerEvents: 'none',
+    borderRadius: '12px',
+  };
+
+  Object.assign(adBlocker.style, blockerStyles);
+
+  document.body.appendChild(adBlocker);
+};
+
+const removeBlocker = () => {
+  const adBlocker = document.querySelector('.ad-blocker');
+  if (adBlocker) document.body.removeChild(adBlocker);
+};
+
 window.onload = function () {
   localStorage.setItem('lastEvent', Date.now());
   setAwake();
@@ -24,32 +63,24 @@ window.onload = function () {
 
   // ad handling
   const player = document.body.querySelector('.html5-video-player');
+  let muter;
 
-  player.classList.add('ad-showing'); // Included for testing (runs everytime)
+  const callback = () => {
+    if (!muter && player.classList.contains('ad-interrupting')) {
+      displayBlocker();
+      muter = setInterval(muteVideo, 100);
+    }
+    if (muter && !player.classList.contains('ad-interrupting')) {
+      clearInterval(muter);
+      muter = null;
+      unmuteVideo();
+      removeBlocker();
+    }
+  };
 
-  if (player.classList.contains('ad-showing')) {
-    const adBlocker = document.createElement('div');
-    adBlocker.className = 'ad-blocker';
+  const observer = new MutationObserver(callback);
 
-    playerDims = player.getBoundingClientRect();
-
-    const blockerStyles = {
-      position: 'absolute',
-      backgroundColor: 'black',
-      zIndex: Number.MAX_SAFE_INTEGER,
-      width: `${playerDims.width}px`,
-      height: `${playerDims.height}px`,
-      top: `${playerDims.top}px`,
-      left: `${playerDims.left}px`,
-      opacity: '0.5',
-      pointerEvents: 'none',
-      borderRadius: '12px',
-    };
-
-    Object.assign(adBlocker.style, blockerStyles);
-
-    document.body.appendChild(adBlocker);
-  }
+  observer.observe(player, { attributes: true });
 };
 
 chrome.storage.onChanged.addListener((changes) => {
