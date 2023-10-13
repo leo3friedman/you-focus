@@ -66,10 +66,14 @@ window.onload = function () {
   let muter;
 
   const callback = () => {
+    const adSkip = document.querySelector('.ytp-ad-skip-button');
+    if (adSkip) adSkip.click();
+
     if (!muter && player.classList.contains('ad-interrupting')) {
       displayBlocker();
       muter = setInterval(muteVideo, 100);
     }
+
     if (muter && !player.classList.contains('ad-interrupting')) {
       clearInterval(muter);
       muter = null;
@@ -80,7 +84,7 @@ window.onload = function () {
 
   const observer = new MutationObserver(callback);
 
-  observer.observe(player, { attributes: true });
+  observer.observe(player, { attributes: true, childList: true });
 };
 
 chrome.storage.onChanged.addListener((changes) => {
