@@ -21,8 +21,15 @@ const unmuteVideo = () => {
   if (video) video.muted = false;
 };
 
+const fakeAd = () => {
+  const player = document.body.querySelector('.html5-video-player');
+  player.classList.add('ad-interrupting');
+  setTimeout(() => player.classList.remove('ad-interrupting'), 10000);
+};
+
 const displayBlocker = () => {
   const adBlocker = document.createElement('div');
+
   adBlocker.className = 'ad-blocker';
 
   playerDims = player.getBoundingClientRect();
@@ -63,20 +70,21 @@ window.onload = function () {
 
   // ad handling
   const player = document.body.querySelector('.html5-video-player');
-  let muter;
+
+  let adShowing = false;
 
   const callback = () => {
     const adSkip = document.querySelector('.ytp-ad-skip-button');
-    if (adSkip) adSkip.click();
+    // if (adSkip) adSkip.click();
 
-    if (!muter && player.classList.contains('ad-interrupting')) {
+    if (!adShowing && player.classList.contains('ad-interrupting')) {
       displayBlocker();
-      muter = setInterval(muteVideo, 100);
+      muteVideo();
+      adShowing = true;
     }
 
-    if (muter && !player.classList.contains('ad-interrupting')) {
-      clearInterval(muter);
-      muter = null;
+    if (adShowing && !player.classList.contains('ad-interrupting')) {
+      adShowing = false;
       unmuteVideo();
       removeBlocker();
     }
@@ -85,6 +93,14 @@ window.onload = function () {
   const observer = new MutationObserver(callback);
 
   observer.observe(player, { attributes: true, childList: true });
+
+  const video = document.querySelector('video');
+
+  video.addEventListener('volumechange', () => {
+    if (adShowing) muteVideo();
+  });
+
+  fakeAd();
 };
 
 chrome.storage.onChanged.addListener((changes) => {
