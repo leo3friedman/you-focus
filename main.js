@@ -12,6 +12,7 @@ const defaultSettings = {
 };
 
 const muteVideo = () => {
+  console.log('muting');
   const video = document.querySelector('video');
   if (video) video.muted = true;
 };
@@ -51,11 +52,15 @@ const getPlayerDims = () => {
 const displayBlocker = () => {
   console.log('building blocker');
   const adBlocker = document.createElement('div');
-  const durationInfo = document.createElement('div');
+  const blockerInfo = document.createElement('div');
+  const headerText = document.createElement('div');
+  const durationText = document.createElement('div');
 
-  durationInfo.className = 'duration-info';
-  durationInfo.innerText = getAdDurationText();
-  const durationStyles = {
+  durationText.className = 'duration-text';
+  headerText.className = 'header-text';
+
+  headerText.innerText = 'YouFocus is silencing the ads';
+  const infoStyles = {
     color: 'white',
     fontSize: '14px',
     position: 'absolute',
@@ -65,7 +70,6 @@ const displayBlocker = () => {
   };
 
   adBlocker.className = 'ad-blocker';
-  const playerDims = getPlayerDims();
   const blockerStyles = {
     position: 'absolute',
     backgroundColor: 'black',
@@ -73,13 +77,16 @@ const displayBlocker = () => {
     opacity: '0.8',
     pointerEvents: 'none',
     borderRadius: '12px',
+    ...getPlayerDims(),
   };
 
-  Object.assign(durationInfo.style, durationStyles);
+  Object.assign(blockerInfo.style, infoStyles);
   Object.assign(adBlocker.style, blockerStyles);
-  Object.assign(adBlocker.style, playerDims);
+  // Object.assign(adBlocker.style, playerDims);
 
-  adBlocker.appendChild(durationInfo);
+  blockerInfo.appendChild(headerText);
+  blockerInfo.appendChild(durationText);
+  adBlocker.appendChild(blockerInfo);
   document.body.appendChild(adBlocker);
 };
 
@@ -89,14 +96,9 @@ const removeBlocker = () => {
 };
 
 const updateBlocker = () => {
-  console.log('updating blocker');
-
-  const adSkip = document.querySelector('.ytp-ad-skip-button');
-  // if (adSkip) adSkip.click();
-
-  const durationInfo = document.querySelector('.duration-info');
-  if (durationInfo) durationInfo.innerText = getAdDurationText();
-  muteVideo();
+  // const durationInfo = document.querySelector('.duration-info');
+  // if (durationInfo) durationInfo.innerText = getAdDurationText();
+  // muteVideo();
 };
 
 // Migrate evenutuall
@@ -125,11 +127,19 @@ window.onload = function () {
   });
 
   const playerObserver = new MutationObserver(() => {
+    // skip if we can
+    const adSkip = document.querySelector('.ytp-ad-skip-button');
+    if (adSkip) {
+      const durationText = document.querySelector('.duration-text');
+      if (durationText) durationText.innerText = 'Auto skipping ad...';
+      setTimeout(() => adSkip.click(), 1000);
+    }
+
     // show our blocker
     if (!adShowing && player.classList.contains('ad-interrupting')) {
       const video = player?.querySelector('video');
       if (video) resizeObserver.observe(video);
-      if (video) video.addEventListener('onvolumechange', muteVideo);
+      if (video) video.addEventListener('volumechange', muteVideo);
 
       muteVideo();
       displayBlocker();
@@ -139,13 +149,12 @@ window.onload = function () {
 
     // remove our blocker
     if (adShowing && !player.classList.contains('ad-interrupting')) {
+      const video = player?.querySelector('video');
+      if (video) video.removeEventListener('volumechange', muteVideo);
       resizeObserver.disconnect();
-      player
-        .querySelector('video')
-        .removeEventListener('onvolumechange', muteVideo, true);
+
       unmuteVideo();
       removeBlocker();
-
       if (adInterval) clearInterval(adInterval);
       adShowing = false;
     }
