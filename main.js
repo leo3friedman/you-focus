@@ -27,8 +27,31 @@ const fakeAd = () => {
   setTimeout(() => player.classList.remove('ad-interrupting'), 10000);
 };
 
+const getAdDurationText = () => {
+  console.log('gettingDuration!');
+  const adText = document.querySelector('.ytp-ad-simple-ad-badge')?.innerText;
+  const duration = document.querySelector(
+    '.ytp-ad-duration-remaining'
+  )?.innerText;
+  return `YouFocus is silencing the ads: ${adText} ${duration}`;
+};
+
 const displayBlocker = () => {
   const adBlocker = document.createElement('div');
+  const durationInfo = document.createElement('div');
+  durationInfo.innerText = getAdDurationText();
+  durationInfo.className = 'duration-info';
+
+  const durationStyles = {
+    color: 'white',
+    fontSize: '14px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  };
+
+  Object.assign(durationInfo.style, durationStyles);
 
   adBlocker.className = 'ad-blocker';
 
@@ -42,13 +65,14 @@ const displayBlocker = () => {
     height: `${playerDims.height}px`,
     top: `${playerDims.top}px`,
     left: `${playerDims.left}px`,
-    opacity: '0.5',
+    opacity: '0.9',
     pointerEvents: 'none',
     borderRadius: '12px',
   };
 
   Object.assign(adBlocker.style, blockerStyles);
 
+  adBlocker.appendChild(durationInfo);
   document.body.appendChild(adBlocker);
 };
 
@@ -88,6 +112,12 @@ window.onload = function () {
       unmuteVideo();
       removeBlocker();
     }
+
+    if (adShowing) {
+      const durationInfo = document.querySelector('.duration-info');
+      console.log(getAdDurationText());
+      if (durationInfo) durationInfo.innerText = getAdDurationText();
+    }
   };
 
   const observer = new MutationObserver(callback);
@@ -100,7 +130,7 @@ window.onload = function () {
     if (adShowing) muteVideo();
   });
 
-  fakeAd();
+  // fakeAd();
 };
 
 chrome.storage.onChanged.addListener((changes) => {
