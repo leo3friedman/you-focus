@@ -28,20 +28,35 @@ const fakeAd = () => {
 };
 
 const getAdDurationText = () => {
-  console.log('gettingDuration!');
   const adText = document.querySelector('.ytp-ad-simple-ad-badge')?.innerText;
   const duration = document.querySelector(
     '.ytp-ad-duration-remaining'
   )?.innerText;
-  return `YouFocus is silencing the ads: ${adText} ${duration}`;
+  return `YouFocus is silencing the ads.\n${adText} ${duration}`;
+};
+
+const getPlayerDims = () => {
+  const playerDims = player.getBoundingClientRect();
+  return {
+    width: `${playerDims.width}px`,
+    height: `${playerDims.height}px`,
+    top: `${playerDims.top}px`,
+    left: `${playerDims.left}px`,
+  };
+};
+
+const onDurationMutation = () => {
+  const durationInfo = document.querySelector('.duration-info');
+  if (durationInfo) durationInfo.innerText = getAdDurationText();
 };
 
 const displayBlocker = () => {
+  console.log('building blocker');
   const adBlocker = document.createElement('div');
   const durationInfo = document.createElement('div');
-  durationInfo.innerText = getAdDurationText();
-  durationInfo.className = 'duration-info';
 
+  durationInfo.className = 'duration-info';
+  durationInfo.innerText = getAdDurationText();
   const durationStyles = {
     color: 'white',
     fontSize: '14px',
@@ -51,26 +66,20 @@ const displayBlocker = () => {
     transform: 'translate(-50%, -50%)',
   };
 
-  Object.assign(durationInfo.style, durationStyles);
-
   adBlocker.className = 'ad-blocker';
-
-  playerDims = player.getBoundingClientRect();
-
+  const playerDims = getPlayerDims();
   const blockerStyles = {
     position: 'absolute',
     backgroundColor: 'black',
     zIndex: Number.MAX_SAFE_INTEGER,
-    width: `${playerDims.width}px`,
-    height: `${playerDims.height}px`,
-    top: `${playerDims.top}px`,
-    left: `${playerDims.left}px`,
-    opacity: '0.9',
+    opacity: '0.8',
     pointerEvents: 'none',
     borderRadius: '12px',
   };
 
+  Object.assign(durationInfo.style, durationStyles);
   Object.assign(adBlocker.style, blockerStyles);
+  Object.assign(adBlocker.style, playerDims);
 
   adBlocker.appendChild(durationInfo);
   document.body.appendChild(adBlocker);
@@ -80,6 +89,25 @@ const removeBlocker = () => {
   const adBlocker = document.querySelector('.ad-blocker');
   if (adBlocker) document.body.removeChild(adBlocker);
 };
+
+const updateBlocker = () => {
+  console.log('updating blocker');
+
+  const adSkip = document.querySelector('.ytp-ad-skip-button');
+  // if (adSkip) adSkip.click();
+
+  const durationInfo = document.querySelector('.duration-info');
+  if (durationInfo) durationInfo.innerText = getAdDurationText();
+
+  const blocker = document.querySelector('.ad-blocker');
+  const playerDims = getPlayerDims();
+  if (blocker?.style && playerDims) Object.assign(blocker.style, playerDims);
+
+  muteVideo();
+};
+
+// Migrate evenutuall
+document.addEventListener('DOMContentLoaded', () => {});
 
 window.onload = function () {
   localStorage.setItem('lastEvent', Date.now());
@@ -96,32 +124,34 @@ window.onload = function () {
   const player = document.body.querySelector('.html5-video-player');
 
   let adShowing = false;
+  let adInterval;
 
   const callback = () => {
     const adSkip = document.querySelector('.ytp-ad-skip-button');
     // if (adSkip) adSkip.click();
 
+    // Show our blocker
     if (!adShowing && player.classList.contains('ad-interrupting')) {
       displayBlocker();
       muteVideo();
+      adInterval = setInterval(updateBlocker, 100);
       adShowing = true;
     }
 
     if (adShowing && !player.classList.contains('ad-interrupting')) {
       adShowing = false;
+      if (adInterval) clearInterval(adInterval);
       unmuteVideo();
       removeBlocker();
     }
 
     if (adShowing) {
       const durationInfo = document.querySelector('.duration-info');
-      console.log(getAdDurationText());
       if (durationInfo) durationInfo.innerText = getAdDurationText();
     }
   };
 
   const observer = new MutationObserver(callback);
-
   observer.observe(player, { attributes: true, childList: true });
 
   const video = document.querySelector('video');
@@ -143,7 +173,6 @@ chrome.storage.onChanged.addListener((changes) => {
 
 function activeEvent() {
   if (Date.now() - localStorage.getItem('lastEvent') > 5000) {
-    console.log('active event');
     localStorage.setItem('lastEvent', Date.now());
     setAwake();
   }
