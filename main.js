@@ -32,10 +32,13 @@ const getAdDurationText = () => {
   const duration = document.querySelector(
     '.ytp-ad-duration-remaining'
   )?.innerText;
-  return `YouFocus is silencing the ads.\n${adText} ${duration}`;
+  return `YouFocus is silencing the ads.\n${adText ? adText : ''} ${
+    duration ? duration : ''
+  }`;
 };
 
 const getPlayerDims = () => {
+  const player = document.body.querySelector('.html5-video-player');
   const playerDims = player.getBoundingClientRect();
   return {
     width: `${playerDims.width}px`,
@@ -43,11 +46,6 @@ const getPlayerDims = () => {
     top: `${playerDims.top}px`,
     left: `${playerDims.left}px`,
   };
-};
-
-const onDurationMutation = () => {
-  const durationInfo = document.querySelector('.duration-info');
-  if (durationInfo) durationInfo.innerText = getAdDurationText();
 };
 
 const displayBlocker = () => {
@@ -98,11 +96,6 @@ const updateBlocker = () => {
 
   const durationInfo = document.querySelector('.duration-info');
   if (durationInfo) durationInfo.innerText = getAdDurationText();
-
-  const blocker = document.querySelector('.ad-blocker');
-  const playerDims = getPlayerDims();
-  if (blocker?.style && playerDims) Object.assign(blocker.style, playerDims);
-
   muteVideo();
 };
 
@@ -120,47 +113,45 @@ window.onload = function () {
     activeEvent();
   });
 
-  // ad handling
   const player = document.body.querySelector('.html5-video-player');
-
   let adShowing = false;
   let adInterval;
+  const resizeObserver = new ResizeObserver(() => {
+    const blocker = document.querySelector('.ad-blocker');
+    const playerDims = getPlayerDims();
+    if (blocker?.style && playerDims) {
+      Object.assign(blocker.style, playerDims);
+    }
+  });
 
-  const callback = () => {
-    const adSkip = document.querySelector('.ytp-ad-skip-button');
-    // if (adSkip) adSkip.click();
-
-    // Show our blocker
+  const playerObserver = new MutationObserver(() => {
+    // show our blocker
     if (!adShowing && player.classList.contains('ad-interrupting')) {
-      displayBlocker();
+      const video = player?.querySelector('video');
+      if (video) resizeObserver.observe(video);
+      if (video) video.addEventListener('onvolumechange', muteVideo);
+
       muteVideo();
+      displayBlocker();
       adInterval = setInterval(updateBlocker, 100);
       adShowing = true;
     }
 
+    // remove our blocker
     if (adShowing && !player.classList.contains('ad-interrupting')) {
-      adShowing = false;
-      if (adInterval) clearInterval(adInterval);
+      resizeObserver.disconnect();
+      player
+        .querySelector('video')
+        .removeEventListener('onvolumechange', muteVideo, true);
       unmuteVideo();
       removeBlocker();
+
+      if (adInterval) clearInterval(adInterval);
+      adShowing = false;
     }
-
-    if (adShowing) {
-      const durationInfo = document.querySelector('.duration-info');
-      if (durationInfo) durationInfo.innerText = getAdDurationText();
-    }
-  };
-
-  const observer = new MutationObserver(callback);
-  observer.observe(player, { attributes: true, childList: true });
-
-  const video = document.querySelector('video');
-
-  video.addEventListener('volumechange', () => {
-    if (adShowing) muteVideo();
   });
-
-  // fakeAd();
+  playerObserver.observe(player, { attributes: true });
+  fakeAd();
 };
 
 chrome.storage.onChanged.addListener((changes) => {
