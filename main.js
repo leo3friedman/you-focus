@@ -82,7 +82,6 @@ const displayBlocker = () => {
 
   Object.assign(blockerInfo.style, infoStyles);
   Object.assign(adBlocker.style, blockerStyles);
-  // Object.assign(adBlocker.style, playerDims);
 
   blockerInfo.appendChild(headerText);
   blockerInfo.appendChild(durationText);
@@ -95,26 +94,7 @@ const removeBlocker = () => {
   if (adBlocker) document.body.removeChild(adBlocker);
 };
 
-const updateBlocker = () => {
-  // const durationInfo = document.querySelector('.duration-info');
-  // if (durationInfo) durationInfo.innerText = getAdDurationText();
-  // muteVideo();
-};
-
-// Migrate evenutuall
-document.addEventListener('DOMContentLoaded', () => {});
-
-window.onload = function () {
-  localStorage.setItem('lastEvent', Date.now());
-  setAwake();
-  setVisibilities();
-  document.body.addEventListener('mousemove', () => {
-    activeEvent();
-  });
-  document.body.addEventListener('click', () => {
-    activeEvent();
-  });
-
+document.addEventListener('DOMContentLoaded', () => {
   const player = document.body.querySelector('.html5-video-player');
   let adShowing = false;
   let adInterval;
@@ -125,12 +105,24 @@ window.onload = function () {
       Object.assign(blocker.style, playerDims);
     }
   });
+  const previewObserver = new MutationObserver(() => {
+    const preview = document.querySelector('.ytp-ad-preview-container');
+    const durationText = document.querySelector('duration-text');
+    if (!preview) return;
+
+    if (preview.classList.contains('.countdown-next-to-thumbnail')) {
+      durationText.innerText = `Auto-skipping ads in ${preview.innerText} seconds`;
+    } else {
+      durationText.innerText = `Unskippable ads detected`;
+    }
+  });
 
   const playerObserver = new MutationObserver(() => {
     // skip if we can
     const adSkip = document.querySelector('.ytp-ad-skip-button');
     if (adSkip) {
       const durationText = document.querySelector('.duration-text');
+      previewObserver.disconnect();
       if (durationText) durationText.innerText = 'Auto skipping ad...';
       setTimeout(() => adSkip.click(), 1000);
     }
@@ -138,8 +130,14 @@ window.onload = function () {
     // show our blocker
     if (!adShowing && player.classList.contains('ad-interrupting')) {
       const video = player?.querySelector('video');
-      if (video) resizeObserver.observe(video);
+      const preview = document.querySelector('.ytp-ad-preview-container');
       if (video) video.addEventListener('volumechange', muteVideo);
+      if (video) resizeObserver.observe(video);
+      if (preview)
+        previewObserver.observe(preview, {
+          characterData: true,
+          subtree: true,
+        });
 
       muteVideo();
       displayBlocker();
@@ -152,6 +150,7 @@ window.onload = function () {
       const video = player?.querySelector('video');
       if (video) video.removeEventListener('volumechange', muteVideo);
       resizeObserver.disconnect();
+      previewObserver.disconnect();
 
       unmuteVideo();
       removeBlocker();
@@ -160,7 +159,19 @@ window.onload = function () {
     }
   });
   playerObserver.observe(player, { attributes: true });
-  fakeAd();
+  // fakeAd();
+});
+
+window.onload = function () {
+  localStorage.setItem('lastEvent', Date.now());
+  setAwake();
+  setVisibilities();
+  document.body.addEventListener('mousemove', () => {
+    activeEvent();
+  });
+  document.body.addEventListener('click', () => {
+    activeEvent();
+  });
 };
 
 chrome.storage.onChanged.addListener((changes) => {
