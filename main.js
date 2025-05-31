@@ -110,7 +110,7 @@ function setVisibilities() {
         : document.body.classList.remove(key)
     })
 
-    if (!result.hideShorts && muteIntervalId) {
+    if ((!result.hideShorts || !result.isAwake) && muteIntervalId) {
       clearInterval(muteIntervalId)
       muteIntervalId = null
       unmuteAllVideos()
@@ -119,6 +119,7 @@ function setVisibilities() {
     if (
       result.hideMode &&
       result.hideShorts &&
+      result.awake &&
       window.location.pathname.startsWith('/shorts')
     ) {
       // Recurrently mute all shorts (YouTube periodically un-mutes)

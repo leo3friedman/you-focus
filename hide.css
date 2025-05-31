@@ -4,24 +4,13 @@ body,
   visibility: hidden;
 }
 
-/* hide homepage video feed */
-body.hideMode.awake.hideHomepageVideos ytd-two-column-browse-results-renderer[page-subtype="home"],
-/* hide Explore and Shorts in first section (Home...Subscriptions) of homepage sidebar */
-body.hideMode.hideHomepageSidebar
-  ytd-guide-section-renderer:first-child
-  #items
-  > ytd-guide-entry-renderer:not(:first-child):not(:nth-child(4)),
-/* hide EXPLORE and MORE FROM YOUTUBE sections of homepage sidebar*/
-body.hideMode.awake.hideHomepageSidebar
-  ytd-guide-section-renderer:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(5)),
-/* hide Explore and Shorts on mini homepage sidebar */
-body.hideMode.awake.hideHomepageSidebar ytd-mini-guide-entry-renderer:not(:first-child):not(:nth-child(4)):not(:nth-child(5)),
-/* hide related sidebar on video player */
-body.hideMode.awake.hidePlayerRelated #related,
-/* hide endwall on video player*/
-body.hideMode.awake.hidePlayerEndwall .videowall-endscreen,
-/* hide comments on video player */
-body.hideMode.awake.hidePlayerComments .ytd-comments {
+body.hideMode.awake.hideHomepageVideos ytd-two-column-browse-results-renderer[page-subtype="home"] /* hide homepage video feed */,
+body.hideMode.awake.hideHomepageSidebar ytd-mini-guide-renderer[role="navigation"], /* minimized sidebar */
+body.hideMode.awake.hideHomepageSidebar tp-yt-app-drawer[role="navigation"], /* maximized sidebar */
+body.hideMode.awake.hideHomepageSidebar yt-icon-button#guide-button.ytd-masthead, /* menu button to open sidebar */
+body.hideMode.awake.hidePlayerRelated #related /* hide related sidebar on video player */,
+body.hideMode.awake.hidePlayerEndwall .videowall-endscreen /* hide endwall on video player*/,
+body.hideMode.awake.hidePlayerComments .ytd-comments /* hide comments on video player */ {
   display: none;
 }
 
