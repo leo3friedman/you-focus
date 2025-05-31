@@ -22,6 +22,7 @@ YouFocus creates a more productive YouTube experience by:
 - Disabling Subscription Mode
 - Blocking Banner Ads
 - Disabling Autoplay
-- Cleaning Up Left Sidebar
+- Hide Left Sidebar
 - Run on Schedule Feature
+- Hide Shorts
 
