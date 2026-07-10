@@ -18,7 +18,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --project unit",
+    "test:integration": "vitest --project integration",
     "install": "npm install --ignore-scripts"
   },
   "devDependencies": {

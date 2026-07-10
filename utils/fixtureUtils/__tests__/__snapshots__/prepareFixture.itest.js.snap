@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`prepareFixture > should generate a working static fixture from a saved webpage 1`] = `
+"<!DOCTYPE html><html><head>
+    <link rel="stylesheet" href="./webpage_files/styles.css" class="rel">
+</head>
+<body>
+
+</body></html>"
+`;

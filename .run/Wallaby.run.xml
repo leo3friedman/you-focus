@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Wallaby" type="wallaby" factoryName="wallaby" configType="Configuration File" config="$PROJECT_DIR$/vitest.config.js" wsl="No" SmartStart="No">
+    <method v="2" />
+  </configuration>
+</component>
